@@ -5,6 +5,11 @@ apply plugin: 'application'
 
 mainClassName = 'lab3_stack_20244554_EscobarZamorano.Main'
 
+
+run{
+    standardInput = System.in
+}
+
 repositories {
     jcenter()
 }

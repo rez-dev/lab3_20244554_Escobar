@@ -4,10 +4,10 @@ public class Usuario {
     //------* Atributos *------
     private String username;
     private String password;
-    private int reputacion;
+    private Integer reputacion;
     
     //------* Constructor *------
-    public Usuario(String username, String password, int reputacion) {
+    public Usuario(String username, String password, Integer reputacion) {
         this.username = username;
         this.password = password;
         this.reputacion = reputacion;
@@ -22,7 +22,7 @@ public class Usuario {
         this.password = password;
     }
 
-    public void setReputacion(int reputacion) {
+    public void setReputacion(Integer reputacion) {
         this.reputacion = reputacion;
     }
     
@@ -35,7 +35,7 @@ public class Usuario {
         return password;
     }
 
-    public int getReputacion() {
+    public Integer getReputacion() {
         return reputacion;
     }
     
@@ -45,9 +45,35 @@ public class Usuario {
         return usuario;
     }
 
-    public Usuario cambiarRepu(Usuario user, int repu){
-        int nuevaRepu = user.getReputacion() + repu;
+    public Usuario cambiarRepu(Usuario user, Integer repu){
+        Integer nuevaRepu = user.getReputacion() + repu;
         user.setReputacion(nuevaRepu);
         return user;
     }
+    
+    public boolean usuariosIgualesLogin(Object usuario){
+        if(this == usuario){
+            return true;
+        }
+        if(!(usuario instanceof Usuario)){
+            return false;
+        }
+        
+        Usuario nuevoUsuario = (Usuario)usuario;
+        
+        return this.getUsername().equals(nuevoUsuario.getUsername()) && this.getPassword().equals(nuevoUsuario.getPassword()); 
+    }
+    
+    public boolean usuariosIgualesRegister(Object usuario){
+        if(this == usuario){
+            return true;
+        }
+        if(!(usuario instanceof Usuario)){
+            return false;
+        }
+        
+        Usuario nuevoUsuario = (Usuario)usuario;
+        
+        return this.getUsername().equals(nuevoUsuario.getUsername()); 
+    }    
 }

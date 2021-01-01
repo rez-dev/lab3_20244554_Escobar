@@ -1,14 +1,60 @@
 package lab3_stack_20244554_EscobarZamorano;
 
-//import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Main {
-    //public static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
     
     public static void main(String[] args) {
-        //Usuario usuario1 = new Usuario("pepe","xd",1000);
+        //Se definen las listas para el stack
+        ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
+        
+        ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
+        
+        Usuario user1 = new Usuario("pepe1","123",100);
+        
+        Respuesta r1 = new Respuesta(1010,user1,"12-12-2020","AYUDA");
+        
+        listaUsuarios.add(user1);
+        
+        Stack stack1 = new Stack(user1);
+        
+        stack1.setListaUsuarios(listaUsuarios);
+        
+        //System.out.println(stack1.getListaUsuarios().get(0).getUsername());
+        
+        //System.out.println(stack1.getUsuarioActivo().getUsername());
+        
+        //System.out.println(stack1.getListaUsuarios().size());
+        
+        stack1.register("Rolando","gatito");
+        
+        stack1.login("Rolando", "gatito");
+        
+        System.out.println("Usuario Activo ---> "+stack1.getUsuarioActivo().getUsername());
+        
+        stack1.logout("Rolando","gatito");
+        System.out.println("Usuario Activo ---> "+stack1.getUsuarioActivo().getUsername());
+        
+        
+        //System.out.println(stack1.getListaUsuarios().get(0).getUsername());
+        //System.out.println(stack1.getListaUsuarios().get(0).getPassword());
+        
+        //System.out.println("");
+        
+        //System.out.println(stack1.getListaUsuarios().get(1).getUsername());
+        //System.out.println(stack1.getListaUsuarios().get(1).getPassword());
+        
+        //System.out.println(stack1.getListaUsuarios().size());
+        
+        
+        
+        
         
         /*
+        Usuario usuario1 = new Usuario("pepe","xd",1000);
+        
         String nombre = usuario1.getUsername();
         
         System.out.println(nombre);
@@ -18,14 +64,14 @@ public class Main {
         String nuevoNombre = usuario1.getUsername();
         
         System.out.println(nuevoNombre);
-        */
-        /*
+        
+        
         usuario1 = usuario1.cambiarRepu(usuario1,500);
         
         int nuevaRepu = usuario1.getReputacion();
         
         System.out.println(nuevaRepu);
-        */
+        
         
         //Respuesta r1 = new Respuesta(1010, usuario1, "10-10-2020","Como me llamo?");
         
@@ -38,7 +84,9 @@ public class Main {
         //String nombre = usuario1.getUsername();
         
         //System.out.println(nombre);
+        */
         
+        /*
         //------* MENU *------
         //Se define una variable que va a guardar la opcion seleccionada por el usuario
         int opcion;
@@ -49,10 +97,9 @@ public class Main {
         System.out.println("INTRODUZCA SU OPCION: ");
         
         //Se recibe la opcion ingresada por el usuario
-        //opcion = Integer.parseInt(scanner.nextLine());
+        opcion = Integer.parseInt(scanner.nextLine());
         
         //Dependiendo la opcion que ingrese el usuario se procede a ejecutar el comando
-        /*
         switch(opcion){
             case 1:
                 System.out.println("Ha seleccionado Agregar una pregunta");
@@ -81,6 +128,7 @@ public class Main {
             default:
                 System.out.println("Ha ingresado una opcion incorrecta");
         }
-        */ 
+        */
+
     }
 }
