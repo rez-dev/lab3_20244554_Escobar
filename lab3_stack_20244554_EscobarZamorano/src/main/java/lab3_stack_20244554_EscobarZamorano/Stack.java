@@ -13,7 +13,7 @@ public class Stack {
     public Stack(){
         this.listaPreguntas = new ArrayList<Pregunta>();
         this.listaUsuarios = new ArrayList<Usuario>();
-        this.usuarioActivo = new Usuario(null, null, null);
+        this.usuarioActivo = new Usuario(null, null, null, null);
     }
     
     public Stack(Usuario usuarioActivo) {
@@ -53,7 +53,7 @@ public class Stack {
     //1)VERIFICAR QUE EL USUARIO NO ESTE REGISTRADO
     public Stack register(String username, String password){
         //Se crea un usuario con los datos ingresados
-        Usuario nuevoUsuario = new Usuario(username,password,0);
+        Usuario nuevoUsuario = new Usuario(username,password);
         
         for (int i = 0; i < this.getListaUsuarios().size() ; i++) {
             if (this.getListaUsuarios().get(i).usuariosIgualesRegister(nuevoUsuario)) {
@@ -70,7 +70,7 @@ public class Stack {
     //------ LOGIN ------
     public Stack login(String username, String password){
         //Se crea un usuario con los datos ingresados
-        Usuario nuevoUsuario = new Usuario(username,password,0);
+        Usuario nuevoUsuario = new Usuario(username,password);
         
         //Se verifica que las credenciales ingresadas esten correctas
         for (int i = 0; i < this.getListaUsuarios().size(); i++) {
@@ -89,7 +89,7 @@ public class Stack {
     //------ LOGOUT ------
     public Stack logout(String username, String password){
         //Se crea un usuario con los datos ingresados
-        Usuario nuevoUsuario = new Usuario(username,password,0);
+        Usuario nuevoUsuario = new Usuario(username,password);
         
         //Se verifica que haya una sesion iniciada
         if (this.getUsuarioActivo().getUsername() == null) {
@@ -99,7 +99,7 @@ public class Stack {
         
         //Se verifica que el usuario activo sea el usuario que quiere cerrar sesion
         if (this.getUsuarioActivo().usuariosIgualesLogin(nuevoUsuario)) {
-            this.setUsuarioActivo(new Usuario(null,null,null));
+            this.setUsuarioActivo(new Usuario(null, null, null, null));
             System.out.println("SE HA CERRADO SESION");
             return this;
         }
@@ -157,6 +157,45 @@ public class Stack {
         return this;
     }
     
+    //------ REWARD ------
+    public Stack reward(int recompensa){
+        //VERIFICAR SESION INICIADA
+        if (this.getUsuarioActivo().getUsername() == null) {
+            //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
+            return this;  
+        }
+        
+        //VERIFICA QUE TENGA LOS PUNTOS SUFICIENTES PARA PODER DAR UNA RECOMPENSA
+        if ( this.getUsuarioActivo().getReputacion() < recompensa) {
+            System.out.println("NO PUEDE ASIGNAR UNA RECOMPENSA");
+            return this;
+        }
+        
+        //SE DESCUENTA LA REPUTACION Y SE DEJA COMO REPUTACION RETENIDA
+        Integer reputacion = this.getUsuarioActivo().getReputacion();
+        Integer reputacionNueva = reputacion - recompensa;
+        this.getUsuarioActivo().setReputacion(reputacionNueva);
+        this.getUsuarioActivo().setReputacionRetenida(recompensa);
+        
+        //Se muestran las preguntas disponibles para responder
+        System.out.println("Elija una pregunta a la que quiere asignar una recompensa:\n");
+        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
+            System.out.println(this.getListaPreguntas().get(i).getTituloPregunta());
+            System.out.println(this.getListaPreguntas().get(i).getTextoPregunta());
+            System.out.println("ID: " + this.getListaPreguntas().get(i).getIdPregunta());
+            System.out.println("\n");
+        }
+        System.out.println("Ingrese el id de la pregunta escogida: ");
+        
+        int idEscogido = Integer.parseInt(scanner.nextLine());
+        
+        //Se setea la recompensa en la recompensa de la pregunta
+        this.getListaPreguntas().get(idEscogido).setRecompensaPregunta(recompensa);
+        
+        return this;
+  
+    }
     
     
 }
+

@@ -111,13 +111,25 @@ public class Main {
         
         //System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());
         
-        stack1.answer("Estas en Chile");
+        //stack1.answer("Estas en Chile");
         
-        System.out.println("cantidad de respuestas -->" + stack1.getListaPreguntas().get(1).getListaRespuestas().size());
+        //System.out.println("cantidad de respuestas -->" + stack1.getListaPreguntas().get(1).getListaRespuestas().size());
         
-        System.out.println("texto respuesta --->" + stack1.getListaPreguntas().get(1).getListaRespuestas().get(0).getTextoRespuesta());
+        //System.out.println("texto respuesta --->" + stack1.getListaPreguntas().get(1).getListaRespuestas().get(0).getTextoRespuesta());
         
+        stack1.login("Rodrigo", "123");
         
+        System.out.println("recompensa a pregunta antes --->" + stack1.getListaPreguntas().get(1).getRecompensaPregunta());
+        
+        System.out.println("reputacion antes --> " + stack1.getUsuarioActivo().getReputacion());
+        System.out.println("reputacion retenida antes --> " + stack1.getUsuarioActivo().getReputacionRetenida());
+       
+        stack1.reward(400);
+        
+        System.out.println("recompensa a pregunta despues --->" + stack1.getListaPreguntas().get(1).getRecompensaPregunta());
+        
+        System.out.println("reputacion despues --> " + stack1.getUsuarioActivo().getReputacion());
+        System.out.println("reputacion retenida despues --> " + stack1.getUsuarioActivo().getReputacionRetenida());        
         
         
         

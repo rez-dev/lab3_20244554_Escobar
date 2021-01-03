@@ -5,13 +5,23 @@ public class Usuario {
     private String username;
     private String password;
     private Integer reputacion;
+    private Integer reputacionRetenida;
     
     //------* Constructor *------
-    public Usuario(String username, String password, Integer reputacion) {
+    public Usuario(String username, String password) {
+        this.username = username;
+        this.password = password;
+        this.reputacion = 1000;
+        this.reputacionRetenida = 0;
+    }
+    public Usuario(String username, String password, Integer reputacion, Integer reputacionRetenida) {
         this.username = username;
         this.password = password;
         this.reputacion = reputacion;
+        this.reputacionRetenida = reputacionRetenida;
     }
+    
+    
     
     //------* Setters *------
     public void setUsername(String username) {
@@ -25,6 +35,10 @@ public class Usuario {
     public void setReputacion(Integer reputacion) {
         this.reputacion = reputacion;
     }
+
+    public void setReputacionRetenida(Integer reputacionRetenida) {
+        this.reputacionRetenida = reputacionRetenida;
+    }
     
     //------* Getters *------
     public String getUsername() {
@@ -37,6 +51,10 @@ public class Usuario {
 
     public Integer getReputacion() {
         return reputacion;
+    }
+
+    public Integer getReputacionRetenida() {
+        return reputacionRetenida;
     }
     
     //------* Metodos *------
