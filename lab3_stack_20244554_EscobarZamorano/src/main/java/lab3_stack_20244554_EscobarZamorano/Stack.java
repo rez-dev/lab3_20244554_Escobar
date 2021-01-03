@@ -1,6 +1,7 @@
 package lab3_stack_20244554_EscobarZamorano;
 
 import java.util.ArrayList;
+import static lab3_stack_20244554_EscobarZamorano.Main.scanner;
 
 public class Stack {
     //------* Atributos *------
@@ -125,6 +126,36 @@ public class Stack {
         return this;
     }
     
+    //------ ANSWER ------
+    public Stack answer(String contenidoRespuesta){
+        //VERIFICAR SESION INICIADA
+        if (this.getUsuarioActivo().getUsername() == null) {
+            //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
+            return this;  
+        }
+        
+        //Se muestran las preguntas disponibles para responder
+        System.out.println("Elija una pregunta:\n");
+        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
+            System.out.println(this.getListaPreguntas().get(i).getTituloPregunta());
+            System.out.println(this.getListaPreguntas().get(i).getTextoPregunta());
+            System.out.println("ID: " + this.getListaPreguntas().get(i).getIdPregunta());
+            System.out.println("\n");
+        }
+        System.out.println("Ingrese el id de la pregunta escogida: ");
+        
+        int idEscogido = Integer.parseInt(scanner.nextLine());
+        
+        //System.out.println("EL ID ESCOGIDO ES: " + idEscogido);
+        
+        int idNuevaRespuesta = this.getListaPreguntas().get(idEscogido).getListaRespuestas().size();
+        
+        Respuesta respuestaNueva = new Respuesta(idNuevaRespuesta, this.getUsuarioActivo(), "12-12-2020", contenidoRespuesta);
+        
+        this.getListaPreguntas().get(idEscogido).getListaRespuestas().add(respuestaNueva);
+        
+        return this;
+    }
     
     
     

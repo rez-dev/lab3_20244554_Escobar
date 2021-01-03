@@ -83,9 +83,12 @@ public class Main {
         
         //System.out.println(stack1.getUsuarioActivo().getUsername());
         
+        
         Stack stack1 = new Stack();
         
         stack1.register("Rodrigo","123");
+        
+        stack1.register("Pepito","321");
         
         stack1.login("Rodrigo", "123");
         
@@ -100,10 +103,19 @@ public class Main {
         
         stack1.ask("Mi primera pregunta", "COMO ME LLAMO AYUDA", listaEtiquetas);
         
-        System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
+        stack1.login("Pepito","321");
         
-        System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());
+        stack1.ask("Mi segunda pregunta", "DONDE ESTOY?", listaEtiquetas);
         
+        //System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
+        
+        //System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());
+        
+        stack1.answer("Estas en Chile");
+        
+        System.out.println("cantidad de respuestas -->" + stack1.getListaPreguntas().get(1).getListaRespuestas().size());
+        
+        System.out.println("texto respuesta --->" + stack1.getListaPreguntas().get(1).getListaRespuestas().get(0).getTextoRespuesta());
         
         
         
