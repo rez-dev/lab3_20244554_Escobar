@@ -129,13 +129,22 @@ public class Main {
         System.out.println("recompensa a pregunta despues --->" + stack1.getListaPreguntas().get(1).getRecompensaPregunta());
         
         System.out.println("reputacion despues --> " + stack1.getUsuarioActivo().getReputacion());
-        System.out.println("reputacion retenida despues --> " + stack1.getUsuarioActivo().getReputacionRetenida());        
+        System.out.println("reputacion retenida despues --> " + stack1.getUsuarioActivo().getReputacionRetenida());
         
+        stack1.login("Pepito","321");
         
+        stack1.answer("Te llamas Rodrigo xd");
         
+        stack1.login("Rodrigo", "123");
         
+        stack1.accept();
         
+        //System.out.println("reputacion de Pepito ---> " + stack1.getListaUsuarios().get(1).getReputacion());
+       
+ 
+        stack1.login("Pepito", "321");
         
+        System.out.println("reputacion de Pepito --->" + stack1.getUsuarioActivo().getReputacion());
         
         /*
         Usuario usuario1 = new Usuario("pepe","xd",1000);

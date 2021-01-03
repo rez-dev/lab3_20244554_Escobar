@@ -76,7 +76,7 @@ public class Stack {
         for (int i = 0; i < this.getListaUsuarios().size(); i++) {
             if (this.getListaUsuarios().get(i).usuariosIgualesLogin(nuevoUsuario)) {
                 //Si las credenciales coinciden se deja al usuario como usuario activo
-                this.setUsuarioActivo(nuevoUsuario);
+                this.setUsuarioActivo(this.getListaUsuarios().get(i));
                 System.out.println("SE PUDO LOGEAR CORRECTAMENTE");
                 return this;
             }
@@ -194,6 +194,66 @@ public class Stack {
         
         return this;
   
+    }
+    
+    //------ ACCEPT ------
+    public Stack accept(){
+        //VERIFICAR SESION INICIADA
+        if (this.getUsuarioActivo().getUsername() == null) {
+            //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
+            return this;  
+        }
+        
+        //Se deben mostrar las preguntas propias del usuario activo
+        System.out.println("Elija una de las preguntas que quiere revisar:\n");
+        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
+            if (this.getUsuarioActivo().usuariosIgualesRegister(this.getListaPreguntas().get(i).getAutorPregunta())) {
+                System.out.println("LA PREGUNTA ES DEL USUARIO ACTIVO");
+                System.out.println(this.getListaPreguntas().get(i).getTituloPregunta());
+                System.out.println(this.getListaPreguntas().get(i).getTextoPregunta());
+                System.out.println("ID: " + this.getListaPreguntas().get(i).getIdPregunta());
+                System.out.println("\n");
+            }
+        }
+        System.out.println("Ingrese el id de la pregunta escogida: ");
+        
+        int idEscogido = Integer.parseInt(scanner.nextLine());
+        
+        //SE MUESTRAN LAS RESPUESTAS A LA PREGUNTA SELECCIONADA
+        System.out.println("Elija la respuesta que desea marcar como aceptada");
+        for (int i = 0; i < this.getListaPreguntas().get(idEscogido).getListaRespuestas().size(); i++) {
+            System.out.println(this.getListaPreguntas().get(idEscogido).getListaRespuestas().get(i).getTextoRespuesta());
+            System.out.println("ID: " + this.getListaPreguntas().get(idEscogido).getListaRespuestas().get(i).getIdRespuesta());
+            System.out.println("\n");
+        }
+        System.out.println("Ingrese el id de la respuesta escogida: ");
+        
+        int idRespuestaEscogida = Integer.parseInt(scanner.nextLine());
+        
+        //SE PROCEDE A MARCAR COMO ACEPTADA LA PREGUNTA
+        this.getListaPreguntas().get(idEscogido).setEstadoPregunta("RESPUESTA ACEPTADA");
+        
+        //SE PROCEDE A OTORGAR LOS PUNTOS A LOS USUARIOS
+        //Se quitan los puntos retenidos al usuario
+        //PROVISORIAMENTE SOLO ES SI EL AUTOR DE LA PREGUNTA OFRECIO RECOMPENSA
+        this.getUsuarioActivo().setReputacionRetenida(0);
+        
+        //se copia la recompensa asignada a la respuesta
+        int recompensa = this.getListaPreguntas().get(idEscogido).getRecompensaPregunta();
+        
+        //Se deja en 0 la recompensa
+        this.getListaPreguntas().get(idEscogido).setRecompensaPregunta(0);
+        
+        //Se busca el usuario que hizo la respuesta aceptada
+        for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+            if (this.getListaPreguntas().get(idEscogido).getListaRespuestas().get(idRespuestaEscogida).getAutorRespuesta().usuariosIgualesRegister(this.getListaUsuarios().get(i))) {
+                //Si se encuentra al autor de la respuesta escogida se le suman los puntos de la recompensa a su reputacion
+                int reputacionAntigua = this.getListaUsuarios().get(i).getReputacion();
+                reputacionAntigua = reputacionAntigua + recompensa;
+                this.getListaUsuarios().get(i).setReputacion(reputacionAntigua);
+            }
+        }
+        return this;
     }
     
     
