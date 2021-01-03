@@ -8,6 +8,7 @@ public class Main {
     
     public static void main(String[] args) {
         //Se definen las listas para el stack
+        /*
         ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
         
         ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
@@ -21,6 +22,7 @@ public class Main {
         Stack stack1 = new Stack(user1);
         
         stack1.setListaUsuarios(listaUsuarios);
+        
         
         //System.out.println(stack1.getListaUsuarios().get(0).getUsername());
         
@@ -36,7 +38,7 @@ public class Main {
         
         stack1.logout("Rolando","gatito");
         System.out.println("Usuario Activo ---> "+stack1.getUsuarioActivo().getUsername());
-        
+        */
         
         //System.out.println(stack1.getListaUsuarios().get(0).getUsername());
         //System.out.println(stack1.getListaUsuarios().get(0).getPassword());
@@ -47,6 +49,65 @@ public class Main {
         //System.out.println(stack1.getListaUsuarios().get(1).getPassword());
         
         //System.out.println(stack1.getListaUsuarios().size());
+        
+        //------ PRUEBA ------
+        //Stack stack1 = new Stack();
+        
+        //Usuario user1 = new Usuario("pepe","123",0);
+        //Usuario user2 = new Usuario("pepa","321",0);
+        
+        
+        //stack1.getListaUsuarios().add(user1);
+        
+        //stack1.getListaUsuarios().add(user2);
+        
+        //System.out.println("---> " + stack1.getListaUsuarios().get(0).getUsername());
+        
+        //System.out.println("---> " + stack1.getListaUsuarios().get(1).getUsername());
+        
+        //System.out.println(stack1.getListaPreguntas().size());
+        
+        //PRUEBA PREGUNTA
+        //Pregunta p1 = new Pregunta(1010, new Etiqueta("et1","es la et1"), new Etiqueta("et2","es la et2"), new Etiqueta("et3","es la et3"), "Primera Pregunta", "Texto Primera Pregunta", "12-12-2020", new Usuario("Rodrigo","123",0), "NO ACEPTADA", 0);
+        
+        //System.out.println(p1.getTituloPregunta());
+        //Stack stack1 = new Stack();
+        
+        //stack1.register("User1","pass1");
+        
+        //stack1.login("User1","pass1");
+        
+        //System.out.println(stack1.getUsuarioActivo().getUsername());
+        
+        //stack1.logout("User1","pass1");
+        
+        //System.out.println(stack1.getUsuarioActivo().getUsername());
+        
+        Stack stack1 = new Stack();
+        
+        stack1.register("Rodrigo","123");
+        
+        stack1.login("Rodrigo", "123");
+        
+        ArrayList<Etiqueta> listaEtiquetas = new ArrayList<Etiqueta>();
+        
+        listaEtiquetas.add(new Etiqueta("et1","descripcion et1"));
+        
+        listaEtiquetas.add(new Etiqueta("et2","descripcion et2"));
+        
+        listaEtiquetas.add(new Etiqueta("et3","descripcion et3"));
+        
+        
+        stack1.ask("Mi primera pregunta", "COMO ME LLAMO AYUDA", listaEtiquetas);
+        
+        System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
+        
+        System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());
+        
+        
+        
+        
+        
         
         
         

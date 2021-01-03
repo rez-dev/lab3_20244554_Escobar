@@ -9,7 +9,15 @@ public class Stack {
     private Usuario usuarioActivo;
     
     //------* Constructor *------
+    public Stack(){
+        this.listaPreguntas = new ArrayList<Pregunta>();
+        this.listaUsuarios = new ArrayList<Usuario>();
+        this.usuarioActivo = new Usuario(null, null, null);
+    }
+    
     public Stack(Usuario usuarioActivo) {
+        this.listaPreguntas = new ArrayList<Pregunta>();
+        this.listaUsuarios = new ArrayList<Usuario>();
         this.usuarioActivo = usuarioActivo;
     }
     
@@ -78,22 +86,42 @@ public class Stack {
     }
     
     //------ LOGOUT ------
-    
     public Stack logout(String username, String password){
         //Se crea un usuario con los datos ingresados
         Usuario nuevoUsuario = new Usuario(username,password,0);
         
-        //Se crea un usuario nulo que representa un usuario inactivo
-        Usuario usuarioInactivo = new Usuario(null,null,null);
+        //Se verifica que haya una sesion iniciada
+        if (this.getUsuarioActivo().getUsername() == null) {
+            System.out.println("NO HAY SESION INICIADA");
+            return this;
+        }
         
         //Se verifica que el usuario activo sea el usuario que quiere cerrar sesion
         if (this.getUsuarioActivo().usuariosIgualesLogin(nuevoUsuario)) {
-            this.setUsuarioActivo(usuarioInactivo);
+            this.setUsuarioActivo(new Usuario(null,null,null));
             System.out.println("SE HA CERRADO SESION");
             return this;
         }
         
         System.out.println("LAS CREDENCIALES NO COINCIDEN");
+        return this;
+    }
+    
+    //------ ASK ------
+    public Stack ask(String tituloPregunta, String contenidoPregunta, ArrayList<Etiqueta> listaEtiquetas){
+        //VERIFICAR SESION INICIADA
+        if (this.getUsuarioActivo().getUsername() == null) {
+            //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
+            return this;  
+        }
+        int idNuevo = this.getListaPreguntas().size();
+        
+        Pregunta preguntaNueva = new Pregunta(idNuevo, tituloPregunta, contenidoPregunta, "12-12-2020", this.getUsuarioActivo(), "NO ACEPTADA", 0);
+        
+        preguntaNueva.setListaEtiquetas(listaEtiquetas);
+        
+        this.getListaPreguntas().add(preguntaNueva);
+
         return this;
     }
     
