@@ -1,14 +1,16 @@
 package lab3_stack_20244554_EscobarZamorano;
 
+import java.util.Date;
+
 public class Respuesta {
     //------* Atributos *------
     private int idRespuesta;
     private Usuario autorRespuesta;
-    private String fechaRespuesta;
+    private Date fechaRespuesta;
     private String textoRespuesta;
     
     //------* Constructor *------
-    public Respuesta(int idRespuesta, Usuario autorRespuesta, String fechaRespuesta, String textoRespuesta) {
+    public Respuesta(int idRespuesta, Usuario autorRespuesta, Date fechaRespuesta, String textoRespuesta) {
         this.idRespuesta = idRespuesta;
         this.autorRespuesta = autorRespuesta;
         this.fechaRespuesta = fechaRespuesta;
@@ -24,7 +26,7 @@ public class Respuesta {
         this.autorRespuesta = autorRespuesta;
     }
     
-    public void setFechaRespuesta(String fechaRespuesta) {
+    public void setFechaRespuesta(Date fechaRespuesta) {
         this.fechaRespuesta = fechaRespuesta;
     }
     
@@ -41,7 +43,7 @@ public class Respuesta {
         return autorRespuesta;
     }
  
-    public String getFechaRespuesta() {
+    public Date getFechaRespuesta() {
         return fechaRespuesta;
     }    
 

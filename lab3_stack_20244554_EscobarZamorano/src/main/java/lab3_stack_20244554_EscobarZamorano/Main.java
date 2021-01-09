@@ -1,12 +1,65 @@
 package lab3_stack_20244554_EscobarZamorano;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     
     public static void main(String[] args) {
+        
+        //Prueba Register
+        Stack stack1 = new Stack();
+        
+        stack1.register("Rodrigo", "gatito123");
+        
+        //stack1.register("Rodrigo", "gato123");
+        
+        //Prueba Login
+        stack1.login("Rodrigo", "gatito123");
+        
+        System.out.println("usuario activo --->" + stack1.getUsuarioActivo().getUsername());
+        
+        
+        //Prueba Logout
+        //stack1.logout("Rodrigo", "gatito123");
+        
+        //System.out.println("usuario activo ---->" + stack1.getUsuarioActivo().getUsername());
+        
+        //stack1.logout("Rodrigo", "gatito123");
+        
+        //Prueba Ask
+        //Genero una lista de Etiquetas
+        ArrayList<Etiqueta> listaEtiquetas = new ArrayList<Etiqueta>();
+        Etiqueta et1 = new Etiqueta("et1", "descripcion1");
+        Etiqueta et2 = new Etiqueta("et2", "descripcion2");
+        Etiqueta et3 = new Etiqueta("et3", "descripcion3");
+        listaEtiquetas.add(et1);
+        listaEtiquetas.add(et2);
+        listaEtiquetas.add(et3);
+        
+        stack1.ask("Primera pregunta", "Esta es mi primera pregunta", listaEtiquetas);
+        /*
+        System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
+        System.out.println(stack1.getListaPreguntas().get(0).getTituloPregunta());
+        System.out.println(stack1.getListaPreguntas().get(0).getTextoPregunta());
+        System.out.println("ETIQUETAS");
+        System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getNombreEtiqueta());
+        System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());*/
+        
+        
+        //Prueba Answer
+        
+        
+        
+        
+        
+        
+        
+        
+        //System.out.println(fecha);
+        
         //Se definen las listas para el stack
         /*
         ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
@@ -83,7 +136,7 @@ public class Main {
         
         //System.out.println(stack1.getUsuarioActivo().getUsername());
         
-        
+        /*
         Stack stack1 = new Stack();
         
         stack1.register("Rodrigo","123");
@@ -146,6 +199,7 @@ public class Main {
         
         System.out.println("reputacion de Pepito --->" + stack1.getUsuarioActivo().getReputacion());
         
+        */
         /*
         Usuario usuario1 = new Usuario("pepe","xd",1000);
         

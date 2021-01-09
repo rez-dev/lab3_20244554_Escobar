@@ -1,21 +1,23 @@
 package lab3_stack_20244554_EscobarZamorano;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Pregunta {
     //------* Atributos *------
     private int idPregunta;
-    private ArrayList<Respuesta> listaRespuestas = new ArrayList<Respuesta>();
-    private ArrayList<Etiqueta> listaEtiquetas = new ArrayList<Etiqueta>();
+    private ArrayList<Respuesta> listaRespuestas;
+    private ArrayList<Etiqueta> listaEtiquetas;
     private String tituloPregunta;
     private String textoPregunta;
-    private String fechaPregunta;
+    private Date fechaPregunta;
     private Usuario autorPregunta;
     private String estadoPregunta;
     private int recompensaPregunta;
+    private ArrayList<Usuario> listaUsuariosRecompensa;
     
     //------* Constructor *------
-    public Pregunta(int idPregunta, Etiqueta et1, Etiqueta et2, Etiqueta et3, String tituloPregunta, String textoPregunta, String fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
+    public Pregunta(int idPregunta, Etiqueta et1, Etiqueta et2, Etiqueta et3, String tituloPregunta, String textoPregunta, Date fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
         this.idPregunta = idPregunta;
         this.listaRespuestas = new ArrayList<Respuesta>();
         this.listaEtiquetas = new ArrayList<Etiqueta>();
@@ -28,9 +30,10 @@ public class Pregunta {
         this.autorPregunta = autorPregunta;
         this.estadoPregunta = estadoPregunta;
         this.recompensaPregunta = recompensaPregunta;
+        this.listaUsuariosRecompensa = new ArrayList<Usuario>();
     }
-
-    public Pregunta(int idPregunta, String tituloPregunta, String textoPregunta, String fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
+    /*
+    public Pregunta(int idPregunta, String tituloPregunta, String textoPregunta, Date fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
         this.idPregunta = idPregunta;
         this.listaRespuestas = new ArrayList<Respuesta>();
         this.listaEtiquetas = new ArrayList<Etiqueta>();
@@ -40,8 +43,20 @@ public class Pregunta {
         this.autorPregunta = autorPregunta;
         this.estadoPregunta = estadoPregunta;
         this.recompensaPregunta = recompensaPregunta;
-    }
+    }*/
 
+    public Pregunta(int idPregunta, ArrayList<Etiqueta> listaEtiquetas, String tituloPregunta, String textoPregunta, Date fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
+        this.idPregunta = idPregunta;
+        this.listaRespuestas = new ArrayList<Respuesta>();
+        this.listaEtiquetas = listaEtiquetas;
+        this.tituloPregunta = tituloPregunta;
+        this.textoPregunta = textoPregunta;
+        this.fechaPregunta = fechaPregunta;
+        this.autorPregunta = autorPregunta;
+        this.estadoPregunta = estadoPregunta;
+        this.recompensaPregunta = recompensaPregunta;
+        this.listaUsuariosRecompensa = new ArrayList<Usuario>();
+    }
     
     //------* Setters *------
     public void setIdPregunta(int idPregunta) {
@@ -64,7 +79,7 @@ public class Pregunta {
         this.textoPregunta = textoPregunta;
     }
 
-    public void setFechaPregunta(String fechaPregunta) {
+    public void setFechaPregunta(Date fechaPregunta) {
         this.fechaPregunta = fechaPregunta;
     }
 
@@ -78,6 +93,10 @@ public class Pregunta {
 
     public void setRecompensaPregunta(int recompensaPregunta) {
         this.recompensaPregunta = recompensaPregunta;
+    }
+
+    public void setListaUsuariosRecompensa(ArrayList<Usuario> listaUsuariosRecompensa) {
+        this.listaUsuariosRecompensa = listaUsuariosRecompensa;
     }
     
     //------* Getters *------
@@ -101,7 +120,7 @@ public class Pregunta {
         return textoPregunta;
     }
 
-    public String getFechaPregunta() {
+    public Date getFechaPregunta() {
         return fechaPregunta;
     }
 
@@ -115,5 +134,9 @@ public class Pregunta {
 
     public int getRecompensaPregunta() {
         return recompensaPregunta;
-    }   
+    }
+
+    public ArrayList<Usuario> getListaUsuariosRecompensa() {
+        return listaUsuariosRecompensa;
+    }
 }
