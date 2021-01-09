@@ -224,8 +224,15 @@ public class Stack {
         Integer reputacionAntigua = this.getUsuarioActivo().getReputacion();
         this.getUsuarioActivo().setReputacionRetenida(reputacionRetenidaAntigua + recompensa);
         
+        //Se crea una copia del usuario
+        String copiaUsername = this.getUsuarioActivo().getUsername();
+        String copiaPassword = this.getUsuarioActivo().getPassword();
+        Usuario copiaUsuario = new Usuario(copiaUsername, copiaPassword);
+        copiaUsuario.setReputacion(reputacionAntigua);
+        copiaUsuario.setReputacionRetenida(reputacionRetenidaAntigua);
+        
         //Se agrega el usuario a la lista de usuarios que ofrecieron recompensa de la pregunta, esta lista tiene una copia del usuario con la recompensa restada
-        this.getListaPreguntas().get(idPreguntaSeleccionada).getListaUsuariosRecompensa().add(this.getUsuarioActivo());
+        this.getListaPreguntas().get(idPreguntaSeleccionada).getListaUsuariosRecompensa().add(copiaUsuario);
         
         //Se obtiene el indice del nuevo usuario en la lista de usuarios que ofrecieron recompensas
         int indexUsuarioRecompensa = this.getListaPreguntas().get(idPreguntaSeleccionada).getListaUsuariosRecompensa().size() - 1;
@@ -332,5 +339,74 @@ public class Stack {
         //Se entrega el stack con las recompensas y descuentos asignados
         return this;
     }
+    
+    
+    //------ VOTE (CASO PREGUNTA)------
+    public Stack vote(int idPregunta, int tipoVoto){
+        //Si el voto es a favor
+        if (tipoVoto == 1) {
+            for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+                if (this.getListaPreguntas().get(idPregunta).getAutorPregunta().usuariosIgualesLogin(this.getListaUsuarios().get(i))) {
+                    int reputacion = this.getListaUsuarios().get(i).getReputacion();
+                    reputacion = reputacion + 10;
+                    this.getListaUsuarios().get(i).setReputacion(reputacion);  
+                }
+            }
+            return this;
+        }else{
+            //El voto es en contra
+            //Se quita reputacion al autor de la pregunta (-2) y se quita reputacion al que vota (-1)
+            for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+                //Se busca el usuario que hizo la pregunta y se le quitan 2 puntos de reputacion
+                if (this.getListaPreguntas().get(idPregunta).getAutorPregunta().usuariosIgualesLogin(this.getListaUsuarios().get(i))) {
+                    int reputacion = this.getListaUsuarios().get(i).getReputacion();
+                    reputacion = reputacion - 2;
+                    this.getListaUsuarios().get(i).setReputacion(reputacion);
+                }
+                //Se busca el usuario que voto en contra y se le quita 1 punto de reputacion
+                if (this.getUsuarioActivo().usuariosIgualesLogin(this.getListaUsuarios().get(i))) {
+                    int reputacion = this.getListaUsuarios().get(i).getReputacion();
+                    reputacion = reputacion - 1;
+                    this.getListaUsuarios().get(i).setReputacion(reputacion);
+                    this.getUsuarioActivo().setReputacion(reputacion);
+                }
+            }
+            return this;
+        }
+    }
+    
+    //------ VOTE (CASO RESPUESTA)------
+    public Stack vote(int idPregunta, int idRespuesta, int tipoVoto){
+        //Si el voto es a favor
+        if (tipoVoto == 1) {
+            for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+                if (this.getListaPreguntas().get(idPregunta).getListaRespuestas().get(idRespuesta).getAutorRespuesta().usuariosIgualesLogin(this.getListaUsuarios().get(i))) {
+                    int reputacion = this.getListaUsuarios().get(i).getReputacion();
+                    reputacion = reputacion + 10;
+                    this.getListaUsuarios().get(i).setReputacion(reputacion);  
+                }               
+            }
+            return this;
+        }else{
+            //El voto es en contra
+            //Se quita reputacion al autor de la respuesta (-2) y se quita reputacion al que vota (-1)
+            for (int i = 0; i < this.getListaUsuarios().size(); i++) {
+                //Se busca al usuario que hizo la respuesta y se le quitan 2 puntos de reputacion
+                if (this.getListaPreguntas().get(idPregunta).getListaRespuestas().get(idRespuesta).getAutorRespuesta().usuariosIgualesLogin(this.getListaUsuarios().get(i))) {
+                    int reputacion = this.getListaUsuarios().get(i).getReputacion();
+                    reputacion = reputacion - 2;
+                    this.getListaUsuarios().get(i).setReputacion(reputacion);
+                }
+                //Se busca al usuario que voto en contra y se le quita 1 punto de reputacion
+                if (this.getUsuarioActivo().usuariosIgualesLogin(this.getListaUsuarios().get(i))) {
+                    int reputacion = this.getListaUsuarios().get(i).getReputacion();
+                    reputacion = reputacion - 1;
+                    this.getListaUsuarios().get(i).setReputacion(reputacion);
+                    this.getUsuarioActivo().setReputacion(reputacion);
+                }
+            }
+            return this;
+        }
+    }   
 }
 

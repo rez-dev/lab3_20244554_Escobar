@@ -13,6 +13,8 @@ public class Main {
         Stack stack1 = new Stack();
         
         stack1.register("Rodrigo", "gatito123");
+        stack1.register("Roberto","1234");
+        stack1.register("Jose","4321");
         
         //stack1.register("Rodrigo", "gato123");
         
@@ -40,6 +42,9 @@ public class Main {
         listaEtiquetas.add(et3);
         
         stack1.ask("Primera pregunta", "Esta es mi primera pregunta", listaEtiquetas);
+        
+        stack1.ask("Segunda Pregunta", "Esta es la segunda pregunta", listaEtiquetas);
+        
         /*
         System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
         System.out.println(stack1.getListaPreguntas().get(0).getTituloPregunta());
@@ -50,6 +55,53 @@ public class Main {
         
         
         //Prueba Answer
+        
+        stack1.login("Roberto", "1234");
+        System.out.println("usuario activo --->" + stack1.getUsuarioActivo().getUsername());
+        
+        stack1.answer(0, "Confirmo, es tu primera pregunta");
+        
+        System.out.println(stack1.getListaPreguntas().get(0).getListaRespuestas().size());
+        System.out.println(stack1.getListaPreguntas().get(0).getListaRespuestas().get(0).getTextoRespuesta());
+        
+        stack1.login("Jose", "4321");
+        
+        System.out.println("reputacion de jose ---> " + stack1.getListaUsuarios().get(2).getReputacion());
+        
+        stack1.reward(0, 500);
+        
+        System.out.println("reputacion de jose ---> " + stack1.getListaUsuarios().get(2).getReputacion());
+        
+        System.out.println("reputacion retenida de jose ---> " + stack1.getListaUsuarios().get(2).getReputacionRetenida());
+        
+        stack1.login("Rodrigo", "gatito123");
+        
+        System.out.println("cantidad de usuarios que ofrecieron recompensa " + stack1.getListaPreguntas().get(0).getListaUsuariosRecompensa().size());
+        
+        stack1.accept(0, 0);
+        
+        System.out.println("reputacion de jose ---> " + stack1.getListaUsuarios().get(2).getReputacion());
+        
+        System.out.println("reputacion retenida de jose ---> " + stack1.getListaUsuarios().get(2).getReputacionRetenida());
+        
+        System.out.println("reputacion de roberto ---> " + stack1.getListaUsuarios().get(1).getReputacion());
+        
+        System.out.println(stack1.getListaPreguntas().get(0).getEstadoPregunta());
+        
+        stack1.login("Jose", "4321");
+        
+        stack1.vote(0, 2);
+        
+        System.out.println("reputacion votada Rodrigo ----> " + stack1.getListaUsuarios().get(0).getReputacion());
+        
+        System.out.println("reputacion vota en contra Jose -----> " + stack1.getListaUsuarios().get(2).getReputacion());
+        
+        
+        
+        
+        
+        
+        
         
         
         
