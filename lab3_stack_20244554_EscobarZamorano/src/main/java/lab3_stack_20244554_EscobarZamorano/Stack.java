@@ -135,7 +135,7 @@ public class Stack {
         Date fecha = new Date();
         
         //Se crea una nueva pregunta con los datos ingresados y los generados
-        Pregunta preguntaNueva = new Pregunta(idNuevo, listaEtiquetas, tituloPregunta, contenidoPregunta, fecha, this.getUsuarioActivo(), "NO ACEPTADA", 0);
+        Pregunta preguntaNueva = new Pregunta(idNuevo, listaEtiquetas, tituloPregunta, contenidoPregunta, fecha, this.getUsuarioActivo(), "ABIERTA", 0);
         
         //Se agrega la pregunta creada a la lista de preguntas del stack
         this.getListaPreguntas().add(preguntaNueva);
@@ -177,7 +177,7 @@ public class Stack {
         int idNuevaRespuesta = this.getListaPreguntas().get(idPreguntaSeleccionada).getListaRespuestas().size();
         
         //Se crea una nueva respuesta con los datos ingresados y generados
-        Respuesta respuestaNueva = new Respuesta(idNuevaRespuesta, this.getUsuarioActivo(), fecha, contenidoRespuesta);
+        Respuesta respuestaNueva = new Respuesta(idNuevaRespuesta, this.getUsuarioActivo(), fecha, contenidoRespuesta,"NO ACEPTADA");
         
         //Se agrega la respuesta creada a la lista de respuestas de la pregunta escogida
         this.getListaPreguntas().get(idPreguntaSeleccionada).getListaRespuestas().add(respuestaNueva);
@@ -292,8 +292,11 @@ public class Stack {
             //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
             return this;  
         }
+        //Se procede a marcar la pregunta como cerrada
+        this.getListaPreguntas().get(idPreguntaEscogida).setEstadoPregunta("CERRADA");
+        
         //Se procede a marcar la respuesta como aceptada
-        this.getListaPreguntas().get(idPreguntaEscogida).setEstadoPregunta("ACEPTADA");
+        this.getListaPreguntas().get(idPreguntaEscogida).getListaRespuestas().get(idRespuestaEscogida).setEstadoRespuesta("ACEPTADA");
         
         //Se procede a quitar la reputacion de los usuarios que ofrecieron una recompensa
         for (int i = 0; i < this.getListaPreguntas().get(idPreguntaEscogida).getListaUsuariosRecompensa().size(); i++) {
@@ -407,6 +410,16 @@ public class Stack {
             }
             return this;
         }
-    }   
+    }
+    
+    //METODO PARA SABER SI UN USUARIO TIENE PREGUNTAS
+    public boolean tienePreguntas(Usuario usuarioActivo){
+        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
+            if (this.getListaPreguntas().get(i).getAutorPregunta().usuariosIgualesRegister(this.getUsuarioActivo())) {
+                return true;    
+            }
+        }
+        return false;
+    }
 }
 

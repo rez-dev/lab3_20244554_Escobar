@@ -8,13 +8,16 @@ public class Respuesta {
     private Usuario autorRespuesta;
     private Date fechaRespuesta;
     private String textoRespuesta;
+    private String estadoRespuesta;
     
     //------* Constructor *------
-    public Respuesta(int idRespuesta, Usuario autorRespuesta, Date fechaRespuesta, String textoRespuesta) {
+    
+    public Respuesta(int idRespuesta, Usuario autorRespuesta, Date fechaRespuesta, String textoRespuesta, String estadoRespuesta) {
         this.idRespuesta = idRespuesta;
         this.autorRespuesta = autorRespuesta;
         this.fechaRespuesta = fechaRespuesta;
         this.textoRespuesta = textoRespuesta;
+        this.estadoRespuesta = estadoRespuesta;
     }
     
     //------* Setters *------
@@ -33,6 +36,10 @@ public class Respuesta {
     public void setTextoRespuesta(String textoRespuesta) {
         this.textoRespuesta = textoRespuesta;
     }
+
+    public void setEstadoRespuesta(String estadoRespuesta) {
+        this.estadoRespuesta = estadoRespuesta;
+    }
     
     //------* Getters *------
     public int getIdRespuesta() {
@@ -49,5 +56,9 @@ public class Respuesta {
 
     public String getTextoRespuesta() {
         return textoRespuesta;
+    }
+
+    public String getEstadoRespuesta() {
+        return estadoRespuesta;
     }
 }
