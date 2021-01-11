@@ -1,290 +1,197 @@
 package lab3_stack_20244554_EscobarZamorano;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
     public static Scanner scanner = new Scanner(System.in);
     
     public static void main(String[] args) {
-        
-        //Prueba Register
-        Stack stack1 = new Stack();
-        
-        stack1.register("Rodrigo", "gatito123");
-        stack1.register("Roberto","1234");
-        stack1.register("Jose","4321");
-        
-        //stack1.register("Rodrigo", "gato123");
-        
-        //Prueba Login
-        stack1.login("Rodrigo", "gatito123");
-        
-        System.out.println("usuario activo --->" + stack1.getUsuarioActivo().getUsername());
-        
-        
-        //Prueba Logout
-        //stack1.logout("Rodrigo", "gatito123");
-        
-        //System.out.println("usuario activo ---->" + stack1.getUsuarioActivo().getUsername());
-        
-        //stack1.logout("Rodrigo", "gatito123");
-        
-        //Prueba Ask
-        //Genero una lista de Etiquetas
+        //------ Creacion de un listado de etiquetas que el usuario puede elegir para sus preguntas ------
+        //Se genera una lista de etiquetas vacia
         ArrayList<Etiqueta> listaEtiquetas = new ArrayList<Etiqueta>();
-        Etiqueta et1 = new Etiqueta("et1", "descripcion1");
-        Etiqueta et2 = new Etiqueta("et2", "descripcion2");
-        Etiqueta et3 = new Etiqueta("et3", "descripcion3");
-        listaEtiquetas.add(et1);
-        listaEtiquetas.add(et2);
-        listaEtiquetas.add(et3);
+        //Se genera una serie de etiquetas
+        Etiqueta python = new Etiqueta("Python", "Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código");
+        Etiqueta novato = new Etiqueta("Novato", "La persona que usa esta etiqueta esta aprendiendo");
+        Etiqueta pro = new Etiqueta("Pro", "La persona que usa esta etiqueta tiene conocimietnos avanzados en la materia");
+        Etiqueta git = new Etiqueta("Git", "Git es un software de control de versiones, pensando en la eficiencia, la confiabilidad y compatibilidad del mantenimiento de versiones de aplicaciones");
+        Etiqueta java = new Etiqueta("Java", "Java es un lenguaje de programación y una plataforma informática que fue comercializada por primera vez en 1995 por Sun Microsystems");
+        Etiqueta c = new Etiqueta("C", "C es un lenguaje de programación de propósito general2?:1 originalmente desarrollado por Dennis Ritchie entre 1969 y 1972 en los Laboratorios Bell");
+        
+        //------ Creacion de Stack Predeterminado con usuarios, preguntas, respuestas y etiquetas------
+        //Se genera un stack vacio
+        Stack stack1 = new Stack(); 
+        //Se registran 4 usuarios con reputacion inicial de 1000 ptos
+        stack1.register("Pepe","colocolo1");
+        stack1.register("Carlos","carlitos21");
+        stack1.register("Hackerman321","anonymous123");
+        stack1.register("MainPython","pythonislife");
+        //------ Se crean 5 preguntas ------
+        //Pregunta 1 y 2
+        listaEtiquetas.add(python);
+        listaEtiquetas.add(novato);
+        stack1.login("Pepe","colocolo1");
+        stack1.ask("Pregunta sobre python", "Python es un lenguaje compilado o interpretado?", listaEtiquetas);
+        stack1.ask("Mostrar por pantalla Python", "Como puedo mostrar algo por pantalla en python?", listaEtiquetas);
+        stack1.logout("Pepe","colocolo1");
+        listaEtiquetas.clear();
+        //Pregunta 3
+        listaEtiquetas.add(pro);
+        listaEtiquetas.add(c);
+        stack1.login("Carlos","carlitos21");
+        stack1.ask("Millones", "Cuantos millones voy a ganar por saber c?", listaEtiquetas);
+        stack1.logout("Carlos","carlitos21");
+        listaEtiquetas.clear();
+        //Pregunta 4
+        listaEtiquetas.add(pro);
+        stack1.login("Hackerman321","anonymous123");
+        stack1.ask("Camaradas", "Busco camaradas para hackear a SpaceX", listaEtiquetas);
+        stack1.logout("Hackerman321","anonymous123");
+        listaEtiquetas.clear();
+        //Pregunta 5
+        listaEtiquetas.add(java);
+        listaEtiquetas.add(git);
+        stack1.login("MainPython","pythonislife");
+        stack1.ask("No tengo idea de Java", "Como hago un commit de mi proyecto de Java?", listaEtiquetas);
+        stack1.logout("MainPython","pythonislife");
+        listaEtiquetas.clear();
+        
+        //------ Se realizan 10 respuestas ------
+        //Respuestas a pregunta 3
+        stack1.login("Pepe","colocolo1");
+        stack1.answer(2, "1 millon aprox");
+        stack1.logout("Pepe","colocolo1");
+        stack1.login("Hackerman321","anonymous123");
+        stack1.answer(2, "Yo diria que medio millon");
+        stack1.logout("Hackerman321","anonymous123");
+        stack1.login("MainPython","pythonislife");
+        stack1.answer(2, "Todos saben que no pagan por saber algo");
+        stack1.logout("MainPython","pythonislife");
+        //Respuestas a pregunta 1
+        stack1.login("Carlos","carlitos21");
+        stack1.answer(0, "Estimado, python es un lenguaje interpretado");
+        stack1.logout("Carlos","carlitos21");
+        stack1.login("Hackerman321","anonymous123");
+        stack1.answer(0, "Python es piton en ingles");
+        stack1.logout("Hackerman321","anonymous123");
+        stack1.login("MainPython","pythonislife");
+        stack1.answer(0, "Python no corresponde a ninguno de los dos");
+        stack1.logout("MainPython","pythonislife");
+        //Respuestas a pregunta 4
+        stack1.login("Carlos","carlitos21");
+        stack1.answer(3, "Yo me uno");
+        stack1.logout("Carlos","carlitos21");
+        stack1.login("Pepe","colocolo1");
+        stack1.answer(3, "Cuenta conmigo");
+        stack1.logout("Pepe","colocolo1");
+        stack1.login("MainPython","pythonislife");
+        stack1.answer(3, "Te voy a denunciar");
+        stack1.logout("MainPython","pythonislife");
+        //Respuesta a pregunta 5
+        stack1.login("Pepe","colocolo1");
+        stack1.answer(4, "Solo debes seguir los siguientes pasos...");
+        stack1.logout("Pepe","colocolo1");
+        
+        //Carga de 3 etiquetas predeterminadas en el stack
+        listaEtiquetas.add(python);
+        listaEtiquetas.add(java);
+        listaEtiquetas.add(c);
+        stack1.setListaEtiquetas(listaEtiquetas);
+        
+        //------* MENU *------
+        //Se define una variable que va a guardar la opcion seleccionada por el usuario
+        int opcion1;
+        System.out.println("\n###### Bienvenido a Stack Overflow ######\nQue tipo de Stack desea cargar?");
+        System.out.println("\n1. Stack precargado con usuarios, preguntas, respuestas y etiquetas creadas");
+        System.out.println("\n2. Stack vacio");
+        System.out.println("\nP0R FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA, 1 o 2:");
+        //Se recibe el valor ingresado por el usuario y se guarda en opcion1
+        opcion1 = Integer.parseInt(scanner.nextLine());
+        //System.out.println("Usted ha seleccionado " + opcion1);  
+        if (opcion1 == 2) {
+            stack1.getListaEtiquetas().clear();
+            stack1.getListaPreguntas().clear();
+            stack1.getListaUsuarios().clear();
+        } 
+        //System.out.println("cantidad de preguntas " + stack1.getListaPreguntas().size());
+        //System.out.println("cantidad de usuarios " + stack1.getListaUsuarios().size());
+        //System.out.println("cantidad de etiquetas " + stack1.getListaEtiquetas().size());
+        
+        int opcion2;
+        System.out.println("\n###### STACK OVERFLOW ######\nQue desea hacer primero?");
+        System.out.println("\n1. Registrarse\n2. Iniciar Sesion");
+        System.out.println("POR FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA, 1 o 2:");
+        //Se recibe el valor ingresado por el usuario y se guarda en opcion2
+        opcion2 = Integer.parseInt(scanner.nextLine());
+        String username1;
+        String password1;
+        switch(opcion2){
+            case 1:
+                System.out.println("Ingrese el nombre de usuario que desea usar:");
+                username1 = scanner.nextLine();
+                System.out.println("Su nombre de usuario es: " + username1);
+                System.out.println("Ingrese la password que desea usar:");
+                password1 = scanner.nextLine();
+                System.out.println("Su contrasena es: " + password1);
+                //Se registra el usuario en el stack
+                stack1.register(username1, password1);
+                //Se deja sesion iniciada
+                stack1.login(username1, password1);
+                break;
+                
+            case 2:
+                System.out.println("Ingrese su nombre de usuario: ");
+                username1 = scanner.nextLine();
+                System.out.println("Su nombre de usuario es: " + username1);
+                System.out.println("Ingrese su password: ");
+                password1 = scanner.nextLine();                
+                System.out.println("Su contrasena es: " + password1);
+                //Inicia sesion en el stack con los datos del usuario
+                stack1.login(username1, password1);
+                break;
+            
+            default:
+                System.out.println("Usted ha seleccionado una opcion invalida");
+        }
+        
+        System.out.println("\n###### STACK OVERFLOW ######\nSesion Iniciada como: " + stack1.getUsuarioActivo().getUsername());
+        System.out.println("\nBienvenido a su plataforma de preguntas y respuestas favorita\nQue desea hacer hoy?");
+        System.out.println("\n1. Agregar una pregunta\n2. Responder una pregunta\n3. Dar Recompensa\n4. Aceptar Respuesta\n5. Cerrar Sesion\n6. Salir del programa");
+        System.out.println("POR FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA:");
+        
+        int opcion3 = Integer.parseInt(scanner.nextLine());
+        
+        //Dependiendo la opcion que ingrese el usuario se procede a ejecutar el comando
+        switch(opcion3){
+            case 1:
+                System.out.println("Ha seleccionado Agregar una pregunta");
+                break;
+                
+            case 2:
+                System.out.println("Ha seleccionado Responder una pregunta");
+                break;
+                
+            case 3:
+                System.out.println("Ha seleccionado Dar Recompensa");
+                break;
+                
+            case 4:
+                System.out.println("Ha seleccionado Aceptar Respuesta");
+                break;
+                
+            case 5:
+                System.out.println("Ha seleccionado Cerrar Sesion");
+                break;
+                
+            case 6:
+                System.out.println("Ha seleccionado Salir del programa");
+                break;
+            
+            default:
+                System.out.println("Ha ingresado una opcion incorrecta");
+        }        
         
-        stack1.ask("Primera pregunta", "Esta es mi primera pregunta", listaEtiquetas);
         
-        stack1.ask("Segunda Pregunta", "Esta es la segunda pregunta", listaEtiquetas);
-        
-        /*
-        System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
-        System.out.println(stack1.getListaPreguntas().get(0).getTituloPregunta());
-        System.out.println(stack1.getListaPreguntas().get(0).getTextoPregunta());
-        System.out.println("ETIQUETAS");
-        System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getNombreEtiqueta());
-        System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());*/
-        
-        
-        //Prueba Answer
-        
-        stack1.login("Roberto", "1234");
-        System.out.println("usuario activo --->" + stack1.getUsuarioActivo().getUsername());
-        
-        stack1.answer(0, "Confirmo, es tu primera pregunta");
-        
-        System.out.println(stack1.getListaPreguntas().get(0).getListaRespuestas().size());
-        System.out.println(stack1.getListaPreguntas().get(0).getListaRespuestas().get(0).getTextoRespuesta());
-        
-        stack1.login("Jose", "4321");
-        
-        System.out.println("reputacion de jose ---> " + stack1.getListaUsuarios().get(2).getReputacion());
-        
-        stack1.reward(0, 500);
-        
-        System.out.println("reputacion de jose ---> " + stack1.getListaUsuarios().get(2).getReputacion());
-        
-        System.out.println("reputacion retenida de jose ---> " + stack1.getListaUsuarios().get(2).getReputacionRetenida());
-        
-        stack1.login("Rodrigo", "gatito123");
-        
-        System.out.println("cantidad de usuarios que ofrecieron recompensa " + stack1.getListaPreguntas().get(0).getListaUsuariosRecompensa().size());
-        
-        stack1.accept(0, 0);
-        
-        System.out.println("reputacion de jose ---> " + stack1.getListaUsuarios().get(2).getReputacion());
-        
-        System.out.println("reputacion retenida de jose ---> " + stack1.getListaUsuarios().get(2).getReputacionRetenida());
-        
-        System.out.println("reputacion de roberto ---> " + stack1.getListaUsuarios().get(1).getReputacion());
-        
-        System.out.println(stack1.getListaPreguntas().get(0).getEstadoPregunta());
-        
-        stack1.login("Jose", "4321");
-        
-        stack1.vote(0, 2);
-        
-        System.out.println("reputacion votada Rodrigo ----> " + stack1.getListaUsuarios().get(0).getReputacion());
-        
-        System.out.println("reputacion vota en contra Jose -----> " + stack1.getListaUsuarios().get(2).getReputacion());
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //System.out.println(fecha);
-        
-        //Se definen las listas para el stack
-        /*
-        ArrayList<Pregunta> listaPreguntas = new ArrayList<Pregunta>();
-        
-        ArrayList<Usuario> listaUsuarios = new ArrayList<Usuario>();
-        
-        Usuario user1 = new Usuario("pepe1","123",100);
-        
-        Respuesta r1 = new Respuesta(1010,user1,"12-12-2020","AYUDA");
-        
-        listaUsuarios.add(user1);
-        
-        Stack stack1 = new Stack(user1);
-        
-        stack1.setListaUsuarios(listaUsuarios);
-        
-        
-        //System.out.println(stack1.getListaUsuarios().get(0).getUsername());
-        
-        //System.out.println(stack1.getUsuarioActivo().getUsername());
-        
-        //System.out.println(stack1.getListaUsuarios().size());
-        
-        stack1.register("Rolando","gatito");
-        
-        stack1.login("Rolando", "gatito");
-        
-        System.out.println("Usuario Activo ---> "+stack1.getUsuarioActivo().getUsername());
-        
-        stack1.logout("Rolando","gatito");
-        System.out.println("Usuario Activo ---> "+stack1.getUsuarioActivo().getUsername());
-        */
-        
-        //System.out.println(stack1.getListaUsuarios().get(0).getUsername());
-        //System.out.println(stack1.getListaUsuarios().get(0).getPassword());
-        
-        //System.out.println("");
-        
-        //System.out.println(stack1.getListaUsuarios().get(1).getUsername());
-        //System.out.println(stack1.getListaUsuarios().get(1).getPassword());
-        
-        //System.out.println(stack1.getListaUsuarios().size());
-        
-        //------ PRUEBA ------
-        //Stack stack1 = new Stack();
-        
-        //Usuario user1 = new Usuario("pepe","123",0);
-        //Usuario user2 = new Usuario("pepa","321",0);
-        
-        
-        //stack1.getListaUsuarios().add(user1);
-        
-        //stack1.getListaUsuarios().add(user2);
-        
-        //System.out.println("---> " + stack1.getListaUsuarios().get(0).getUsername());
-        
-        //System.out.println("---> " + stack1.getListaUsuarios().get(1).getUsername());
-        
-        //System.out.println(stack1.getListaPreguntas().size());
-        
-        //PRUEBA PREGUNTA
-        //Pregunta p1 = new Pregunta(1010, new Etiqueta("et1","es la et1"), new Etiqueta("et2","es la et2"), new Etiqueta("et3","es la et3"), "Primera Pregunta", "Texto Primera Pregunta", "12-12-2020", new Usuario("Rodrigo","123",0), "NO ACEPTADA", 0);
-        
-        //System.out.println(p1.getTituloPregunta());
-        //Stack stack1 = new Stack();
-        
-        //stack1.register("User1","pass1");
-        
-        //stack1.login("User1","pass1");
-        
-        //System.out.println(stack1.getUsuarioActivo().getUsername());
-        
-        //stack1.logout("User1","pass1");
-        
-        //System.out.println(stack1.getUsuarioActivo().getUsername());
-        
-        /*
-        Stack stack1 = new Stack();
-        
-        stack1.register("Rodrigo","123");
-        
-        stack1.register("Pepito","321");
-        
-        stack1.login("Rodrigo", "123");
-        
-        ArrayList<Etiqueta> listaEtiquetas = new ArrayList<Etiqueta>();
-        
-        listaEtiquetas.add(new Etiqueta("et1","descripcion et1"));
-        
-        listaEtiquetas.add(new Etiqueta("et2","descripcion et2"));
-        
-        listaEtiquetas.add(new Etiqueta("et3","descripcion et3"));
-        
-        
-        stack1.ask("Mi primera pregunta", "COMO ME LLAMO AYUDA", listaEtiquetas);
-        
-        stack1.login("Pepito","321");
-        
-        stack1.ask("Mi segunda pregunta", "DONDE ESTOY?", listaEtiquetas);
-        
-        //System.out.println(stack1.getListaPreguntas().get(0).getAutorPregunta().getUsername());
-        
-        //System.out.println(stack1.getListaPreguntas().get(0).getListaEtiquetas().get(0).getDescripcionEtiqueta());
-        
-        //stack1.answer("Estas en Chile");
-        
-        //System.out.println("cantidad de respuestas -->" + stack1.getListaPreguntas().get(1).getListaRespuestas().size());
-        
-        //System.out.println("texto respuesta --->" + stack1.getListaPreguntas().get(1).getListaRespuestas().get(0).getTextoRespuesta());
-        
-        stack1.login("Rodrigo", "123");
-        
-        System.out.println("recompensa a pregunta antes --->" + stack1.getListaPreguntas().get(1).getRecompensaPregunta());
-        
-        System.out.println("reputacion antes --> " + stack1.getUsuarioActivo().getReputacion());
-        System.out.println("reputacion retenida antes --> " + stack1.getUsuarioActivo().getReputacionRetenida());
-       
-        stack1.reward(400);
-        
-        System.out.println("recompensa a pregunta despues --->" + stack1.getListaPreguntas().get(1).getRecompensaPregunta());
-        
-        System.out.println("reputacion despues --> " + stack1.getUsuarioActivo().getReputacion());
-        System.out.println("reputacion retenida despues --> " + stack1.getUsuarioActivo().getReputacionRetenida());
-        
-        stack1.login("Pepito","321");
-        
-        stack1.answer("Te llamas Rodrigo xd");
-        
-        stack1.login("Rodrigo", "123");
-        
-        stack1.accept();
-        
-        //System.out.println("reputacion de Pepito ---> " + stack1.getListaUsuarios().get(1).getReputacion());
-       
- 
-        stack1.login("Pepito", "321");
-        
-        System.out.println("reputacion de Pepito --->" + stack1.getUsuarioActivo().getReputacion());
-        
-        */
-        /*
-        Usuario usuario1 = new Usuario("pepe","xd",1000);
-        
-        String nombre = usuario1.getUsername();
-        
-        System.out.println(nombre);
-        
-        usuario1 = usuario1.cambiarUsername(usuario1, "Ricardo");
-        
-        String nuevoNombre = usuario1.getUsername();
-        
-        System.out.println(nuevoNombre);
-        
-        
-        usuario1 = usuario1.cambiarRepu(usuario1,500);
-        
-        int nuevaRepu = usuario1.getReputacion();
-        
-        System.out.println(nuevaRepu);
-        
-        
-        //Respuesta r1 = new Respuesta(1010, usuario1, "10-10-2020","Como me llamo?");
-        
-        //int idRespuesta = r1.getIdRespuesta();
-        
-        //Usuario autorRespuesta = r1.getAutorRespuesta();
-        
-        //System.out.println(idRespuesta);
-        
-        //String nombre = usuario1.getUsername();
-        
-        //System.out.println(nombre);
-        */
         
         /*
         //------* MENU *------
@@ -327,8 +234,8 @@ public class Main {
             
             default:
                 System.out.println("Ha ingresado una opcion incorrecta");
-        }
-        */
+        }*/
+        
 
     }
 }
