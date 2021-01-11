@@ -103,7 +103,7 @@ public class Main {
         int opcion1;
         System.out.println("\n###### Bienvenido a Stack Overflow ######\nQue tipo de Stack desea cargar?");
         System.out.println("\n1. Stack precargado con usuarios, preguntas, respuestas y etiquetas creadas\n2. Stack vacio");
-        System.out.println("\nP0R FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA, 1 o 2:");
+        System.out.println("\nPOR FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA, 1 o 2:");
         //Se recibe el valor ingresado por el usuario y se guarda en opcion1
         opcion1 = Integer.parseInt(scanner.nextLine());
         //System.out.println("Usted ha seleccionado " + opcion1);  

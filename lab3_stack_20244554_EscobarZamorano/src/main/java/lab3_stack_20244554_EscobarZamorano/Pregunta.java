@@ -30,6 +30,7 @@ public class Pregunta {
         this.listaUsuariosRecompensa = new ArrayList<Usuario>();
     }
     
+    
     //------* Setters *------
     public void setIdPregunta(int idPregunta) {
         this.idPregunta = idPregunta;

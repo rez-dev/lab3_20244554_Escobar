@@ -5,15 +5,13 @@ apply plugin: 'application'
 
 mainClassName = 'lab3_stack_20244554_EscobarZamorano.Main'
 
-
-run{
-    standardInput = System.in
-}
-
 repositories {
     jcenter()
 }
 
 dependencies {
     testImplementation     'junit:junit:4.13'
+}
+run{
+    standardInput = System.in
 }
