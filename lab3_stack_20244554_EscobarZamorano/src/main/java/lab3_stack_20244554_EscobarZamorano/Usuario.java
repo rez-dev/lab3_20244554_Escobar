@@ -14,15 +14,14 @@ public class Usuario {
         this.reputacion = 1000;
         this.reputacionRetenida = 0;
     }
+    
     public Usuario(String username, String password, Integer reputacion, Integer reputacionRetenida) {
         this.username = username;
         this.password = password;
         this.reputacion = reputacion;
         this.reputacionRetenida = reputacionRetenida;
     }
-    
-    
-    
+      
     //------* Setters *------
     public void setUsername(String username) {
         this.username = username;
@@ -58,17 +57,12 @@ public class Usuario {
     }
     
     //------* Metodos *------
-    public Usuario cambiarUsername(Usuario usuario, String nuevoNombre){
-        usuario.setUsername(nuevoNombre);
-        return usuario;
-    }
-
-    public Usuario cambiarRepu(Usuario user, Integer repu){
-        Integer nuevaRepu = user.getReputacion() + repu;
-        user.setReputacion(nuevaRepu);
-        return user;
-    }
-    
+    //------ USUARIOS IGUALES USERNAME Y PASSWORD ------
+    /**
+    *Verifica que un usuario tenga el mismo username y password que otro
+    *@param usuario /Usuario que se desea verificar su username y password
+    *@return /En caso de que ambos datos sean iguales se entrega true, en caso contrario enrtrega false
+    */
     public boolean usuariosIgualesLogin(Object usuario){
         if(this == usuario){
             return true;
@@ -82,6 +76,12 @@ public class Usuario {
         return this.getUsername().equals(nuevoUsuario.getUsername()) && this.getPassword().equals(nuevoUsuario.getPassword()); 
     }
     
+    //------ USUARIOS IGUALES USERNAME ------
+    /**
+    *Verifica que un usuario tenga el mismo username que otro
+    *@param usuario /Usuario que se desea verificar su username
+    *@return /En caso de que los username sean iguales se entrega true, en caso contrario enrtrega false
+    */
     public boolean usuariosIgualesRegister(Object usuario){
         if(this == usuario){
             return true;

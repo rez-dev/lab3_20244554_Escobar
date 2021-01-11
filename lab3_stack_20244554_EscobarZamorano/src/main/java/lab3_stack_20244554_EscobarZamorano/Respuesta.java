@@ -11,7 +11,6 @@ public class Respuesta {
     private String estadoRespuesta;
     
     //------* Constructor *------
-    
     public Respuesta(int idRespuesta, Usuario autorRespuesta, Date fechaRespuesta, String textoRespuesta, String estadoRespuesta) {
         this.idRespuesta = idRespuesta;
         this.autorRespuesta = autorRespuesta;

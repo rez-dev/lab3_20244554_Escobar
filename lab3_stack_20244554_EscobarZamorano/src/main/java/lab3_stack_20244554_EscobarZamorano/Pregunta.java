@@ -17,34 +17,6 @@ public class Pregunta {
     private ArrayList<Usuario> listaUsuariosRecompensa;
     
     //------* Constructor *------
-    public Pregunta(int idPregunta, Etiqueta et1, Etiqueta et2, Etiqueta et3, String tituloPregunta, String textoPregunta, Date fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
-        this.idPregunta = idPregunta;
-        this.listaRespuestas = new ArrayList<Respuesta>();
-        this.listaEtiquetas = new ArrayList<Etiqueta>();
-        this.listaEtiquetas.add(et1);
-        this.listaEtiquetas.add(et2);
-        this.listaEtiquetas.add(et3);
-        this.tituloPregunta = tituloPregunta;
-        this.textoPregunta = textoPregunta;
-        this.fechaPregunta = fechaPregunta;
-        this.autorPregunta = autorPregunta;
-        this.estadoPregunta = estadoPregunta;
-        this.recompensaPregunta = recompensaPregunta;
-        this.listaUsuariosRecompensa = new ArrayList<Usuario>();
-    }
-    /*
-    public Pregunta(int idPregunta, String tituloPregunta, String textoPregunta, Date fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
-        this.idPregunta = idPregunta;
-        this.listaRespuestas = new ArrayList<Respuesta>();
-        this.listaEtiquetas = new ArrayList<Etiqueta>();
-        this.tituloPregunta = tituloPregunta;
-        this.textoPregunta = textoPregunta;
-        this.fechaPregunta = fechaPregunta;
-        this.autorPregunta = autorPregunta;
-        this.estadoPregunta = estadoPregunta;
-        this.recompensaPregunta = recompensaPregunta;
-    }*/
-
     public Pregunta(int idPregunta, ArrayList<Etiqueta> listaEtiquetas, String tituloPregunta, String textoPregunta, Date fechaPregunta, Usuario autorPregunta, String estadoPregunta, int recompensaPregunta) {
         this.idPregunta = idPregunta;
         this.listaRespuestas = new ArrayList<Respuesta>();

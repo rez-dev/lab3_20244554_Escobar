@@ -2,7 +2,6 @@ package lab3_stack_20244554_EscobarZamorano;
 
 import java.util.ArrayList;
 import java.util.Date;
-import static lab3_stack_20244554_EscobarZamorano.Main.scanner;
 
 public class Stack {
     //------* Atributos *------
@@ -61,6 +60,12 @@ public class Stack {
 
     //------* Metodos *------
     //------ REGISTER ------
+    /**
+    *Registra un nuevo usuario en el Stack, en caso de que ya este registrado esta operacion no se realiza. 
+    *@param username /Nombre de usuario que se desea registrar
+    *@param password /Contrasena definida por el usuario para poder iniciar sesion 
+    *@return /Entrega un Stack con el nuevo usuario registrado, en caso de que ya este registrado entrega el mismo Stack
+    */
     public Stack register(String username, String password){
         //Se crea un usuario con los datos ingresados
         Usuario nuevoUsuario = new Usuario(username,password);
@@ -68,17 +73,23 @@ public class Stack {
         //Se verifica si el usuario esta registrado
         for (int i = 0; i < this.getListaUsuarios().size() ; i++) {
             if (this.getListaUsuarios().get(i).usuariosIgualesRegister(nuevoUsuario)) {
-                System.out.println("EL USUARIO ESTA REGISTRADO xd");
+                System.out.println("\nSu registro no se pudo realizar, el username seleccionado ya esta registrado");
                 return this;
             }
         }
         //En el caso de que no se haya encontrado al usuario se registra en la lista
         this.getListaUsuarios().add(nuevoUsuario);
-        System.out.println("EL USUARIO NO ESTA REGISTRADO");
+        //System.out.println("EL USUARIO NO ESTA REGISTRADO");
         return this;
     }
     
     //------ LOGIN ------
+    /**
+    *Inicia sesion de un usuario en base a sus credenciales y lo deja como usuario actvio del Stack
+    *@param username / Nombre de usuario que desea iniciar sesion
+    *@param password /Contrasena para poder iniciar sesion
+    *@return /Si las credenciales estan correctas entrega un Stack con el usuario como usuario activo, en caso contrario se entrega el mismo Stack
+    */
     public Stack login(String username, String password){
         //Se crea un usuario con los datos ingresados
         Usuario nuevoUsuario = new Usuario(username,password);
@@ -88,23 +99,29 @@ public class Stack {
             if (this.getListaUsuarios().get(i).usuariosIgualesLogin(nuevoUsuario)) {
                 //Si las credenciales coinciden se deja al usuario como usuario activo
                 this.setUsuarioActivo(this.getListaUsuarios().get(i));
-                System.out.println("SE PUDO LOGEAR CORRECTAMENTE");
+                //System.out.println("SE PUDO LOGEAR CORRECTAMENTE");
                 return this;
             }
         }
         //En caso de que el usuario no coincida o no este registrado se retorna el mismo stack
-        System.out.println("NO SE PUDO LOGEAR");
+        //System.out.println("NO SE PUDO LOGEAR");
         return this; 
     }
     
     //------ LOGOUT ------
+    /**
+    *Cierra la sesion de un usuario activo 
+    *@param username / Nombre de usuario que desea cerrar sesion
+    *@param password /Contrasena del usuario que desea cerrar sesion
+    *@return /En caso de que las credenciales sean correctas, se entrega un Stack con el usuario activo como inactivo, en caso contrario se entrega el mismo Stack
+    */
     public Stack logout(String username, String password){
         //Se crea un usuario con los datos ingresados
         Usuario nuevoUsuario = new Usuario(username,password);
         
         //Se verifica que haya una sesion iniciada
         if (this.getUsuarioActivo().getUsername() == null) {
-            System.out.println("NO HAY SESION INICIADA");
+            //System.out.println("NO HAY SESION INICIADA");
             return this;
         }
         
@@ -112,16 +129,23 @@ public class Stack {
         if (this.getUsuarioActivo().usuariosIgualesLogin(nuevoUsuario)) {
             //Se deja como usuario inactivo a un usuario con todos sus atributos null
             this.setUsuarioActivo(new Usuario(null, null, null, null));
-            System.out.println("SE HA CERRADO SESION");
+            //System.out.println("SE HA CERRADO SESION");
             //Se retorna el stack con el usuario inactivo
             return this;
         }
-        System.out.println("LAS CREDENCIALES NO COINCIDEN");
+        System.out.println("\nNo se pudo cerrar su sesion, las credenciales ingresadas no coinciden");
         //Se retorna el mismo stack sin cambios
         return this;
     }
     
     //------ ASK ------
+    /**
+    *Ingresa una pregunta creado por el usuario activo al Stack
+    *@param tituloPregunta /Titulo que se define para la pregunta
+    *@param contenidoPregunta /Contenido que tiene la pregunta, de que trata
+    *@param listaEtiquetas /Listado de etiquetas para categorizar la pregunta en un tema especifico
+    *@return /En caso de que el usuario sea un usuario activo se entrega un Stack con la pregunta agregada al listado de preguntas, en caso contrario entrega el mismo Stack 
+    */
     public Stack ask(String tituloPregunta, String contenidoPregunta, ArrayList<Etiqueta> listaEtiquetas){
         //Se verifica que exista una sesion iniciada
         if (this.getUsuarioActivo().getUsername() == null) {
@@ -143,27 +167,15 @@ public class Stack {
         //Se retorna el stack con la pregunta agregada
         return this;
     }
-    
-    //MENU ANSWER
-            /*
-        //Se muestran las preguntas disponibles para responder
-        System.out.println("Elija una pregunta:\n");
-        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
-            System.out.println(this.getListaPreguntas().get(i).getTituloPregunta());
-            System.out.println(this.getListaPreguntas().get(i).getTextoPregunta());
-            System.out.println("ID: " + this.getListaPreguntas().get(i).getIdPregunta());
-            System.out.println("\n");
-        }
-        System.out.println("Ingrese el id de la pregunta escogida: ");
-        
-        int idEscogido = Integer.parseInt(scanner.nextLine());
-        
-        //System.out.println("EL ID ESCOGIDO ES: " + idEscogido);
-        
-        
-        */
-   
+
     //------ ANSWER ------
+    //------ ASK ------
+    /**
+    *Crea una respuesta a una pregunta determinada 
+    *@param idPreguntaSeleccionada /Identificador de la pregunta a la que se desea responder
+    *@param contenidoRespuesta /Contenido de la respuesta, que es lo que se responde
+    *@return /En caso de que el usuario este activo, se entrega un Stack con la respuesta agregada al listado de respuestas de la pregunta indicada, en caso de que el usuario este inactivo se entrega el mismo Stack
+    */
     public Stack answer(int idPreguntaSeleccionada, String contenidoRespuesta){
         //Se verifica que exista una sesion iniciada
         if (this.getUsuarioActivo().getUsername() == null) {
@@ -186,21 +198,13 @@ public class Stack {
         return this;
     }
     
-    //MENU REWARD
-            /*
-        //Se muestran las pregunta disponibles para ofrecer recompensa
-        System.out.println("Elija una pregunta a la que quiere asignar una recompensa:\n");
-        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
-            System.out.println(this.getListaPreguntas().get(i).getTituloPregunta());
-            System.out.println(this.getListaPreguntas().get(i).getTextoPregunta());
-            System.out.println("ID: " + this.getListaPreguntas().get(i).getIdPregunta());
-            System.out.println("\n");
-        }
-        System.out.println("Ingrese el id de la pregunta escogida: ");
-        
-        int idEscogido = Integer.parseInt(scanner.nextLine());*/
-    
     //------ REWARD ------
+    /**
+    *Ofrece una recompensa a una pregunta determinada 
+    *@param idPreguntaSeleccionada /Identificador de la pregunta a la que se desea ofrecer una recompensa
+    *@param recompensa /Cantidad de puntos que se ofrecen como recompensa a la pregunta
+    *@return /En caso de que el usuario tenga sesion iniciada y tenga la reputacion suficiente, se entrega un Stack con la recompensa ofrecida a la pregunta y en caso contrario se entrega el mismo Stack
+    */
     public Stack reward(int idPreguntaSeleccionada,int recompensa){
         //Se verifica que exista una sesion iniciada
         if (this.getUsuarioActivo().getUsername() == null) {
@@ -210,15 +214,10 @@ public class Stack {
         
         //Se verifica que el usuario tenga los puntos suficientes para ofrecer una recompensa (REPUTACION - REPUTACION RETENIDA)
         if ((this.getUsuarioActivo().getReputacion() - this.getUsuarioActivo().getReputacionRetenida()) < recompensa) {
-            System.out.println("NO PUEDE ASIGNAR UNA RECOMPENSA");
+            System.out.println("\nNo se pudo asignar una recompensa, no cuenta con la reputacion suficiente");
             return this;
         }
-        /*
-        if ( this.getUsuarioActivo().getReputacion() < recompensa) {
-            System.out.println("NO PUEDE ASIGNAR UNA RECOMPENSA");
-            return this;
-        }*/
-        
+   
         //La recompensa ofrecida se deja como reputacion retenida
         Integer reputacionRetenidaAntigua = this.getUsuarioActivo().getReputacionRetenida();
         Integer reputacionAntigua = this.getUsuarioActivo().getReputacion();
@@ -255,37 +254,14 @@ public class Stack {
         //Se entrega el stack con la recompensa agregada a la pregunta escogida
         return this;
     }
-    
-    //MENU ACCEPT
-            /*
-        //Se deben mostrar las preguntas propias del usuario activo
-        System.out.println("Elija una de las preguntas que quiere revisar:\n");
-        for (int i = 0; i < this.getListaPreguntas().size(); i++) {
-            if (this.getUsuarioActivo().usuariosIgualesRegister(this.getListaPreguntas().get(i).getAutorPregunta())) {
-                System.out.println("LA PREGUNTA ES DEL USUARIO ACTIVO");
-                System.out.println(this.getListaPreguntas().get(i).getTituloPregunta());
-                System.out.println(this.getListaPreguntas().get(i).getTextoPregunta());
-                System.out.println("ID: " + this.getListaPreguntas().get(i).getIdPregunta());
-                System.out.println("\n");
-            }
-        }
-        System.out.println("Ingrese el id de la pregunta escogida: ");
-        
-        int idEscogido = Integer.parseInt(scanner.nextLine());
-        
-        //SE MUESTRAN LAS RESPUESTAS A LA PREGUNTA SELECCIONADA
-        System.out.println("Elija la respuesta que desea marcar como aceptada");
-        for (int i = 0; i < this.getListaPreguntas().get(idEscogido).getListaRespuestas().size(); i++) {
-            System.out.println(this.getListaPreguntas().get(idEscogido).getListaRespuestas().get(i).getTextoRespuesta());
-            System.out.println("ID: " + this.getListaPreguntas().get(idEscogido).getListaRespuestas().get(i).getIdRespuesta());
-            System.out.println("\n");
-        }
-        System.out.println("Ingrese el id de la respuesta escogida: ");
-        
-        int idRespuestaEscogida = Integer.parseInt(scanner.nextLine());*/
-    
-    
+     
     //------ ACCEPT ------
+    /**
+    *Se acepta una respuesta a una pregunta 
+    *@param idPreguntaEscogida /Identificador de la pregunta a la que se desea revisar sus respuestas
+    *@param idRespuestaEscogida /Identificar de la respuesta que se desea aceptar
+    *@return /En caso de que el usuario tenga sesion iniciada se entrega un Stack con la respuesta marcada como aceptada y la pregunta como cerrada, en caso contrario se entrega el mismo Stack 
+    */
     public Stack accept(int idPreguntaEscogida, int idRespuestaEscogida){
         //Se verifica que exista una sesion iniciada
         if (this.getUsuarioActivo().getUsername() == null) {
@@ -311,19 +287,6 @@ public class Stack {
         //Luego de actualizar las reputaciones de los usuarios que ofrecieron recompensa se borra la lista
         this.getListaPreguntas().get(idPreguntaEscogida).getListaUsuariosRecompensa().clear();
         
-        /*
-        //Se procede a quitar la recompensa retenida al usuario que ofrecio la recompensa
-        int reputacionRetenida = this.getUsuarioActivo().getReputacionRetenida();
-        int reputacion = this.getUsuarioActivo().getReputacion();
-         
-        //La reputacion retenida se descuenta a la reputacion original
-        this.getUsuarioActivo().setReputacion(reputacion - reputacionRetenida);
-        //La reputacion retenida vuelve a ser 0
-        this.getUsuarioActivo().setReputacionRetenida(0);
-        
-        //PROVISORIAMENTE SOLO ES SI EL AUTOR DE LA PREGUNTA OFRECIO RECOMPENSA
-        this.getUsuarioActivo().setReputacionRetenida(0);*/
-        
         //Se copia la recompensa asignada a la respuesta
         int recompensa = this.getListaPreguntas().get(idPreguntaEscogida).getRecompensaPregunta();
         
@@ -342,10 +305,20 @@ public class Stack {
         //Se entrega el stack con las recompensas y descuentos asignados
         return this;
     }
-    
-    
+      
     //------ VOTE (CASO PREGUNTA)------
+    /**
+    *Se vota a favor o en contra de una pregunta
+    *@param idPregunta /Identificador de la pregunta que se desea votar
+    *@param tipoVoto /Identificador que permite verificar si el voto es a favor o en contra, (1 == a favor)(cualquier otro numero == en contra)
+    *@return /En caso de que el usuario tenga sesion iniciada se entrega un Stack con las reputaciones de los usuarios actualizadas segun el voto, en caso contrario se entrega el mismo Stack
+    */
     public Stack vote(int idPregunta, int tipoVoto){
+        //Se verifica que exista una sesion iniciada
+        if (this.getUsuarioActivo().getUsername() == null) {
+            //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
+            return this;  
+        }
         //Si el voto es a favor
         if (tipoVoto == 1) {
             for (int i = 0; i < this.getListaUsuarios().size(); i++) {
@@ -379,7 +352,19 @@ public class Stack {
     }
     
     //------ VOTE (CASO RESPUESTA)------
+    /**
+    *Se vota a favor o en contra de una pregunta
+    *@param idPregunta /Identificador de la pregunta a la que pertenece la respuesta
+    *@param idRespuesta /Identificador de la respuesta que se desea votar
+    *@param tipoVoto /Identificador que permite verificar si el voto es a favor o en contra, (1 == a favor)(cualquier otro numero == en contra)
+    *@return /En caso de que el usuario tenga sesion iniciada se entrega un Stack con las reputaciones de los usuarios actualizadas segun el voto, en caso contrario se entrega el mismo Stack
+    */
     public Stack vote(int idPregunta, int idRespuesta, int tipoVoto){
+        //Se verifica que exista una sesion iniciada
+        if (this.getUsuarioActivo().getUsername() == null) {
+            //SI NO HAY USUARIO CON SESION INICIADA NO SE PUEDE EJECUTAR LA OPERACION
+            return this;  
+        }
         //Si el voto es a favor
         if (tipoVoto == 1) {
             for (int i = 0; i < this.getListaUsuarios().size(); i++) {
@@ -412,7 +397,12 @@ public class Stack {
         }
     }
     
-    //METODO PARA SABER SI UN USUARIO TIENE PREGUNTAS
+    //METODO PARA SABER SI UN USUARIO TIENE PREGUNTAS ASOCIADAS
+    /**
+    *Verifica que un usuario tenga por lo menos una pregunta asociada a el
+    *@param usuarioActivo /Usuario que se desea verificar si posee preguntas
+    *@return /En caso de que el usuario sea autor de por lo menos una pregunta se entrega true, en caso contrario false
+    */
     public boolean tienePreguntas(Usuario usuarioActivo){
         for (int i = 0; i < this.getListaPreguntas().size(); i++) {
             if (this.getListaPreguntas().get(i).getAutorPregunta().usuariosIgualesRegister(this.getUsuarioActivo())) {

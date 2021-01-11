@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) {
         //------ Creacion de un listado de etiquetas que el usuario puede elegir para sus preguntas ------
         //Se genera una lista de etiquetas vacia
-        ArrayList<Etiqueta> listaEtiquetas = new ArrayList<Etiqueta>();
+        ArrayList<Etiqueta> listaEtiquetas = new ArrayList<>();
         //Se genera una serie de etiquetas
         Etiqueta python = new Etiqueta("Python", "Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en la legibilidad de su código");
         Etiqueta novato = new Etiqueta("Novato", "La persona que usa esta etiqueta esta aprendiendo");
@@ -128,12 +128,13 @@ public class Main {
             case 1:
                 System.out.println("Ingrese el nombre de usuario que desea usar:");
                 username1 = scanner.nextLine();
-                System.out.println("Su nombre de usuario es: " + username1);
+                //System.out.println("Su nombre de usuario es: " + username1);
                 System.out.println("Ingrese la password que desea usar:");
                 password1 = scanner.nextLine();
-                System.out.println("Su contrasena es: " + password1);
+                //System.out.println("Su contrasena es: " + password1);
                 //Se registra el usuario en el stack
                 stack1.register(username1, password1);
+                System.out.println("\nSe ha registrado de forma exitosa!");
                 //Se deja sesion iniciada
                 stack1.login(username1, password1);
                 break;
@@ -141,12 +142,13 @@ public class Main {
             case 2:
                 System.out.println("Ingrese su nombre de usuario: ");
                 username1 = scanner.nextLine();
-                System.out.println("Su nombre de usuario es: " + username1);
+                //System.out.println("Su nombre de usuario es: " + username1);
                 System.out.println("Ingrese su password: ");
                 password1 = scanner.nextLine();                
-                System.out.println("Su contrasena es: " + password1);
+                //System.out.println("Su contrasena es: " + password1);
                 //Inicia sesion en el stack con los datos del usuario
                 stack1.login(username1, password1);
+                System.out.println("\nHa iniciado sesion de forma exitosa!");
                 break;
             
             default:
@@ -168,22 +170,23 @@ public class Main {
                 System.out.println("\n###### Ha seleccionado agregar una pregunta ######");
                 System.out.println("\nIngrese el titulo que le quiere dar a la pregunta: ");
                 String tituloPregunta = scanner.nextLine();
-                System.out.println("Su titulo es: " + tituloPregunta);
+                //System.out.println("Su titulo es: " + tituloPregunta);
                 System.out.println("\nIngrese su pregunta: ");
                 String textoPregunta = scanner.nextLine();
-                System.out.println("Su pregunta es: " + textoPregunta);
+                //System.out.println("Su pregunta es: " + textoPregunta);
                 System.out.println("\nElija una de las siguientes etiquetas:");
                 for (int i = 0; i < stack1.getListaEtiquetas().size(); i++) {
                     System.out.println("\n" + i + ". " + stack1.getListaEtiquetas().get(i).getNombreEtiqueta());
                 }
                 System.out.println("\nPOR FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA:");
                 int etiquetaSeleccionada = Integer.parseInt(scanner.nextLine());
-                System.out.println("Usted ha elegido la etiqueta " + stack1.getListaEtiquetas().get(etiquetaSeleccionada).getNombreEtiqueta());
+                //System.out.println("Usted ha elegido la etiqueta " + stack1.getListaEtiquetas().get(etiquetaSeleccionada).getNombreEtiqueta());
                 //Se agrega la etiqueta a una lista
                 ArrayList<Etiqueta> nuevaListaEtiquetas = new ArrayList<Etiqueta>();
                 nuevaListaEtiquetas.add(stack1.getListaEtiquetas().get(etiquetaSeleccionada));
                 //Se agrega la pregunta al stack
                 stack1.ask(tituloPregunta, textoPregunta, nuevaListaEtiquetas);
+                System.out.println("\nSu pregunta ha sido ingresada de forma exitosa!");
                 break;
                 
             case 2:
@@ -202,11 +205,12 @@ public class Main {
                 }
                 System.out.println("\nPOR FAVOR, INGRESE EL ID DE LA PREGUNTA QUE QUIERE RESPONDER: ");
                 int idEscogido = Integer.parseInt(scanner.nextLine());
-                System.out.println("Usted ha seleccionado: " + idEscogido);
+                //System.out.println("Usted ha seleccionado: " + idEscogido);
                 System.out.println("\nIngrese el contenido de su respuesta: ");
                 String contenidoRespuesta = scanner.nextLine();
                 //Se genera la respuesta
                 stack1.answer(idEscogido, contenidoRespuesta);
+                System.out.println("\nSu respuesta ha sido ingresada de forma exitosa!");
                 break;
                 
             case 3:
@@ -225,12 +229,13 @@ public class Main {
                 }
                 System.out.println("\nPOR FAVOR, INGRESE EL ID DE LA PREGUNTA A LA QUE DESEA ASIGNAR UNA RECOMPENSA: ");
                 int idPregunta = Integer.parseInt(scanner.nextLine());
-                System.out.println("Usted ha seleccionado: " + idPregunta);
+                //System.out.println("Usted ha seleccionado: " + idPregunta);
                 System.out.println("\nIngrese la cantidad de puntos que desea ofrecer como recompensa: ");
                 int recompensa = Integer.parseInt(scanner.nextLine());
-                System.out.println("Usted ha asignado como recompensa: " + recompensa);
+                //System.out.println("Usted ha asignado como recompensa: " + recompensa);
                 //Se ofrece la recompensa
                 stack1.reward(idPregunta, recompensa);
+                System.out.println("\nSu recompensa ha sido ofrecida de forma exitosa!");
                 break;
                 
             case 4:
@@ -257,7 +262,7 @@ public class Main {
                 }
                 System.out.println("\nPOR FAVOR, INGRESE EL ID DE LA PREGUNTA QUE DESEA REVISAR: ");
                 int idPreguntaRevisar = Integer.parseInt(scanner.nextLine());
-                System.out.println("Usted ha seleccionado: " + idPreguntaRevisar);
+                //System.out.println("Usted ha seleccionado: " + idPreguntaRevisar);
                 
                 //SE MUESTRAN LAS RESPUESTAS A LA PREGUNTA SELECCIONADA
                 System.out.println("Elija la respuesta que desea marcar como aceptada");
@@ -270,9 +275,10 @@ public class Main {
                 }
                 System.out.println("\nPOR FAVOR, INGRESE EL ID DE LA RESPUESTA QUE DESEA ACEPTAR: ");
                 int idRespuestaEscogida = Integer.parseInt(scanner.nextLine());
-                System.out.println("Usted ha seleccionado la respuesta: " + idRespuestaEscogida);
+                //System.out.println("Usted ha seleccionado la respuesta: " + idRespuestaEscogida);
                 //Se marca como cerrada la pregunta y se marca como aceptada la respuesta
                 stack1.accept(idPreguntaRevisar, idRespuestaEscogida);
+                System.out.println("\nLa respuesta ha sido aceptada de forma exitosa!");
                 break;
                 
             case 5:
@@ -295,10 +301,36 @@ public class Main {
                         System.out.println("        **    " + stack1.getListaPreguntas().get(i).getListaRespuestas().get(j).getTextoRespuesta());
                         System.out.println("        **    " + "ID: " + stack1.getListaPreguntas().get(i).getListaRespuestas().get(j).getIdRespuesta());
                         System.out.println("        ************************************************************");
-                        //System.out.println("\n");
                     }
                     System.out.println("\n"); 
-                }                
+                }
+                System.out.println("Elija que desea votar: ");
+                System.out.println("\n1. Pregunta\n2. Respuesta");
+                System.out.println("\nPOR FAVOR, INGRESE UNA OPCION VALIDA: ");
+                int tipoDato = Integer.parseInt(scanner.nextLine());
+                if (tipoDato == 1) {
+                    System.out.println("\nIngrese el ID de la pregunta que desea votar: ");
+                    int idPreguntaVotar = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Elija si el voto es a favor o en contra: ");
+                    System.out.println("\n1. A favor\n2. En Contra");
+                    System.out.println("\nPOR FAVOR, INGRESE UNA OPCION VALIDA: ");
+                    int tipoVoto = Integer.parseInt(scanner.nextLine());
+                    //Se vota por la pregunta ingresada
+                    stack1.vote(idPreguntaVotar, tipoVoto);
+                    System.out.println("\nSu votacion se ha realizado de forma exitosa!");
+                }else{
+                    System.out.println("\nIngrese el ID de la pregunta a la que pertenece la respuesta: ");
+                    int preguntaParaVotar = Integer.parseInt(scanner.nextLine());
+                    System.out.println("\nIngrese el ID de la respuesta que desea votar: ");
+                    int respuestaParaVotar = Integer.parseInt(scanner.nextLine());
+                    System.out.println("Elija si el voto es a favor o en contra: ");
+                    System.out.println("\n1. A favor\n2. En Contra");
+                    System.out.println("\nPOR FAVOR, INGRESE UNA OPCION VALIDA: ");
+                    int tipoVoto2 = Integer.parseInt(scanner.nextLine());
+                    //Se vota por la respuesta ingresada
+                    stack1.vote(preguntaParaVotar, respuestaParaVotar, tipoVoto2);
+                    System.out.println("\nSu votacion se ha realizado de forma exitosa!");
+                }
                 break;
             
             case 6:
@@ -308,10 +340,10 @@ public class Main {
                 System.out.println("\nPara evitar problemas, ingrese sus credenciales: ");
                 System.out.println("\nIngrese su nombre de usuario: ");
                 String username2 = scanner.nextLine();
-                System.out.println("Su nombre de usuario: " + username2);
+                //System.out.println("Su nombre de usuario: " + username2);
                 System.out.println("\nIngrese su password: ");
                 String password2 = scanner.nextLine();
-                System.out.println("Su password: " + password2);
+                //System.out.println("Su password: " + password2);
                 //Se cierra sesion activa
                 stack1.logout(username2, password2);
                 break;
@@ -328,62 +360,5 @@ public class Main {
                 System.out.println("######################################################################################");
                 System.out.println("\n###### Ha ingresado una opcion incorrecta ######");
         }
-        //System.out.println("recompensa asignada: " + stack1.getListaPreguntas().get(0).getRecompensaPregunta());
-        
-        /*System.out.println("\n");
-        for (int i = 0; i < stack1.getListaPreguntas().get(0).getListaRespuestas().size(); i++) {
-            System.out.println(stack1.getListaPreguntas().get(0).getListaRespuestas().get(i).getTextoRespuesta());
-        }*/
-        
-        //System.out.println("TITULO PREGUNTA HECHA: " + stack1.getListaPreguntas().get(5).getTituloPregunta());
-        //System.out.println("PREGUNTA HECHA: " + stack1.getListaPreguntas().get(5).getTextoPregunta());
-        
-        
-        
-        
-        /*
-        //------* MENU *------
-        //Se define una variable que va a guardar la opcion seleccionada por el usuario
-        int opcion;
-        
-        //Se muestra por pantalla el menu de opciones que puede elegir el usuario
-        System.out.println("\n###### STACK OVERFLOW ######\nRegistrado como: \n\nEscoja su opcion: ");
-        System.out.println("\n1. Agregar una pregunta\n2. Responder una pregunta\n3. Dar Recompensa\n4. Aceptar Respuesta\n5. Cerrar Sesion\n6. Salir del programa");
-        System.out.println("INTRODUZCA SU OPCION: ");
-        
-        //Se recibe la opcion ingresada por el usuario
-        opcion = Integer.parseInt(scanner.nextLine());
-        
-        //Dependiendo la opcion que ingrese el usuario se procede a ejecutar el comando
-        switch(opcion){
-            case 1:
-                System.out.println("Ha seleccionado Agregar una pregunta");
-                break;
-                
-            case 2:
-                System.out.println("Ha seleccionado Responder una pregunta");
-                break;
-                
-            case 3:
-                System.out.println("Ha seleccionado Dar Recompensa");
-                break;
-                
-            case 4:
-                System.out.println("Ha seleccionado Aceptar Respuesta");
-                break;
-                
-            case 5:
-                System.out.println("Ha seleccionado Cerrar Sesion");
-                break;
-                
-            case 6:
-                System.out.println("Ha seleccionado Salir del programa");
-                break;
-            
-            default:
-                System.out.println("Ha ingresado una opcion incorrecta");
-        }*/
-        
-
     }
 }

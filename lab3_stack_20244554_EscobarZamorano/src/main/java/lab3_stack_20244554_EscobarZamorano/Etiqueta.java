@@ -28,6 +28,4 @@ public class Etiqueta {
     public String getDescripcionEtiqueta() {
         return descripcionEtiqueta;
     }
-    
-    //------* Metodos *------  
 }
