@@ -104,7 +104,7 @@ public class Stack {
             }
         }
         //En caso de que el usuario no coincida o no este registrado se retorna el mismo stack
-        //System.out.println("NO SE PUDO LOGEAR");
+        System.out.println("\nNo se pudo iniciar sesion, las credenciales ingresadas no coinciden");
         return this; 
     }
     

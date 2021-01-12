@@ -124,6 +124,7 @@ public class Main {
         opcion2 = Integer.parseInt(scanner.nextLine());
         String username1;
         String password1;
+        int auxiliar;
         switch(opcion2){
             case 1:
                 System.out.println("Ingrese el nombre de usuario que desea usar:");
@@ -132,9 +133,13 @@ public class Main {
                 System.out.println("Ingrese la password que desea usar:");
                 password1 = scanner.nextLine();
                 //System.out.println("Su contrasena es: " + password1);
+                auxiliar = stack1.getListaUsuarios().size();
                 //Se registra el usuario en el stack
                 stack1.register(username1, password1);
-                System.out.println("\nSe ha registrado de forma exitosa!");
+                //Si el numero de usuario aumenta, se registro correctamente el usuario
+                if (auxiliar < stack1.getListaUsuarios().size()) {
+                    System.out.println("\nSe ha registrado de forma exitosa!"); 
+                }
                 //Se deja sesion iniciada
                 stack1.login(username1, password1);
                 break;
@@ -148,18 +153,33 @@ public class Main {
                 //System.out.println("Su contrasena es: " + password1);
                 //Inicia sesion en el stack con los datos del usuario
                 stack1.login(username1, password1);
-                System.out.println("\nHa iniciado sesion de forma exitosa!");
+                if (stack1.getUsuarioActivo().getUsername() != null) {
+                    System.out.println("\nHa iniciado sesion de forma exitosa!"); 
+                }
                 break;
             
             default:
                 System.out.println("Usted ha seleccionado una opcion invalida");
         }
         
+        //Se genera un ciclo para mostrar el menu hasta que el usuario salga del programa
+        int verificador = 0;
+        while (verificador < 1000){
+            
+        if (verificador == 0) {
         System.out.println("\n###### STACK OVERFLOW ######\nSesion Iniciada como: " + stack1.getUsuarioActivo().getUsername());
         System.out.println("\nBienvenido a su plataforma de preguntas y respuestas favorita\nQue desea hacer hoy?");
-        System.out.println("\n1. Agregar una pregunta\n2. Responder una pregunta\n3. Dar Recompensa\n4. Aceptar Respuesta\n5. Votar por Pregunta o Respuesta\n6. Cerrar Sesion\n7. Salir del programa");
+        System.out.println("\n1. Agregar una pregunta\n2. Responder una pregunta\n3. Dar Recompensa\n4. Aceptar Respuesta\n5. Votar por Pregunta o Respuesta\n6. Iniciar sesion\n7. Cerrar Sesion\n8. Salir del programa");
+        System.out.println("\nPOR FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA:");              
+        }else{
+        System.out.println("\n######################################################################################");
+        System.out.println("######################################################################################");
+        System.out.println("\n###### STACK OVERFLOW ######\nSesion Iniciada como: " + stack1.getUsuarioActivo().getUsername());
+        System.out.println("\nBienvenido otra vez a su plataforma de preguntas y respuestas favorita\nQue desea hacer ahora?");
+        System.out.println("\n1. Agregar una pregunta\n2. Responder una pregunta\n3. Dar Recompensa\n4. Aceptar Respuesta\n5. Votar por Pregunta o Respuesta\n6. Iniciar sesion\n7. Cerrar Sesion\n8. Salir del programa");
         System.out.println("\nPOR FAVOR, SOLO INTRODUZCA UNA OPCION VALIDA:");
-        
+        }
+
         int opcion3 = Integer.parseInt(scanner.nextLine());
         
         //Dependiendo la opcion que ingrese el usuario se procede a ejecutar el comando
@@ -187,6 +207,7 @@ public class Main {
                 //Se agrega la pregunta al stack
                 stack1.ask(tituloPregunta, textoPregunta, nuevaListaEtiquetas);
                 System.out.println("\nSu pregunta ha sido ingresada de forma exitosa!");
+                verificador = 1;
                 break;
                 
             case 2:
@@ -211,6 +232,7 @@ public class Main {
                 //Se genera la respuesta
                 stack1.answer(idEscogido, contenidoRespuesta);
                 System.out.println("\nSu respuesta ha sido ingresada de forma exitosa!");
+                verificador = 1;
                 break;
                 
             case 3:
@@ -233,9 +255,14 @@ public class Main {
                 System.out.println("\nIngrese la cantidad de puntos que desea ofrecer como recompensa: ");
                 int recompensa = Integer.parseInt(scanner.nextLine());
                 //System.out.println("Usted ha asignado como recompensa: " + recompensa);
+                //Se guarda la recompensa antigua de la pregunta
+                auxiliar = stack1.getListaPreguntas().get(idPregunta).getRecompensaPregunta();
                 //Se ofrece la recompensa
                 stack1.reward(idPregunta, recompensa);
-                System.out.println("\nSu recompensa ha sido ofrecida de forma exitosa!");
+                if (auxiliar < stack1.getListaPreguntas().get(idPregunta).getRecompensaPregunta()) {
+                    System.out.println("\nSu recompensa ha sido ofrecida de forma exitosa!"); 
+                }
+                verificador = 1;
                 break;
                 
             case 4:
@@ -244,7 +271,8 @@ public class Main {
                 System.out.println("\n###### Ha seleccionado aceptar respuesta ######");
                 //Se verifica si el usuario tiene preguntas asociadas
                 if (!(stack1.tienePreguntas(stack1.getUsuarioActivo()))) {
-                    System.out.println("Usted no tiene preguntas registradas");
+                    System.out.println("\nUsted no tiene preguntas registradas");
+                    verificador = 1;
                     break;
                 }
                 
@@ -264,6 +292,12 @@ public class Main {
                 int idPreguntaRevisar = Integer.parseInt(scanner.nextLine());
                 //System.out.println("Usted ha seleccionado: " + idPreguntaRevisar);
                 
+                //Se verifica si la pregunta tiene respuestas asociadas
+                if (stack1.getListaPreguntas().get(idPreguntaRevisar).getListaRespuestas().isEmpty()) {
+                    System.out.println("\nEsta pregunta no tiene respuestas asociadas");
+                    break;
+                }
+                
                 //SE MUESTRAN LAS RESPUESTAS A LA PREGUNTA SELECCIONADA
                 System.out.println("Elija la respuesta que desea marcar como aceptada");
                 for (int i = 0; i < stack1.getListaPreguntas().get(idPreguntaRevisar).getListaRespuestas().size(); i++) {
@@ -279,6 +313,7 @@ public class Main {
                 //Se marca como cerrada la pregunta y se marca como aceptada la respuesta
                 stack1.accept(idPreguntaRevisar, idRespuestaEscogida);
                 System.out.println("\nLa respuesta ha sido aceptada de forma exitosa!");
+                verificador = 1;
                 break;
                 
             case 5:
@@ -331,9 +366,28 @@ public class Main {
                     stack1.vote(preguntaParaVotar, respuestaParaVotar, tipoVoto2);
                     System.out.println("\nSu votacion se ha realizado de forma exitosa!");
                 }
+                verificador = 1;
                 break;
             
             case 6:
+                System.out.println("\n######################################################################################");
+                System.out.println("######################################################################################");
+                System.out.println("\n###### Ha seleccionado iniciar sesion ######");
+                System.out.println("Ingrese su nombre de usuario: ");
+                username1 = scanner.nextLine();
+                //System.out.println("Su nombre de usuario es: " + username1);
+                System.out.println("Ingrese su password: ");
+                password1 = scanner.nextLine();                
+                //System.out.println("Su contrasena es: " + password1);
+                //Inicia sesion en el stack con los datos del usuario
+                stack1.login(username1, password1);
+                if (stack1.getUsuarioActivo().getUsername() != null) {
+                    System.out.println("\nHa iniciado sesion de forma exitosa!"); 
+                }
+                verificador = 1;
+                break;
+                
+            case 7:
                 System.out.println("\n######################################################################################");
                 System.out.println("######################################################################################");
                 System.out.println("\n###### Ha seleccionado cerrar sesion ######");
@@ -346,19 +400,27 @@ public class Main {
                 //System.out.println("Su password: " + password2);
                 //Se cierra sesion activa
                 stack1.logout(username2, password2);
+                if (stack1.getUsuarioActivo().getUsername() == null) {
+                    System.out.println("\nHa cerrado sesion de forma exitosa!"); 
+                }
+                verificador = 1;
                 break;
                 
-            case 7:
+            case 8:
                 System.out.println("\n######################################################################################");
                 System.out.println("######################################################################################");
                 System.out.println("\n###### Ha seleccionado salir del programa ######");
                 System.out.println("\n ADIOS! VUELVA PRONTO!");
+                //Se desborda el verificador para salir del ciclo y terminar la ejecucion del programa
+                verificador = 10001;
                 break;
             
             default:
                 System.out.println("\n######################################################################################");
                 System.out.println("######################################################################################");
                 System.out.println("\n###### Ha ingresado una opcion incorrecta ######");
+                verificador = 1;
+        }
         }
     }
 }
